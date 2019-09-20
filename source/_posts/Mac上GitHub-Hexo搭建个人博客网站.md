@@ -4,6 +4,7 @@ date: 2019-09-19 16:22:14
 categories:
 - iOS
 tags:
+- hexo
 ---
 
 ## 一、写此文章的原因
@@ -15,7 +16,11 @@ tags:
 
 #### 2.1、安装git
 在终端中输入`git --version`来查看你的电脑上是否有`git`环境，如果出现了如下提示，则证明本地有`git`环境，跳过第1步，直接安装`Node.js`
-<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-162326@2x.png width=400>
+
+```
+wanglizhi@wlz:~$     git --version
+git version 2.20.1 (Apple Git-117)
+```
 
 安装`git`有两种方法
 
@@ -31,7 +36,12 @@ tags:
 
 下载并安装完成之后，输入如下命令即可检查安装结果
 
-<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-171830@2x.png width=400 float=right>
+```
+wanglizhi@wlz:~$     node --version
+v10.16.3
+wanglizhi@wlz:~$     npm --version
+6.9.0
+```
 
 ## 三、安装`Hexo`
 
@@ -50,8 +60,10 @@ sudo npm install -g hexo-cli --unsafe-perm
 
 #### 4.2、依次执行以下命令，下载相关文件
 
-<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-174819.png width=400>
-<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-174946.png width=400>
+```
+wanglizhi@wlz:~/Documents/iOS/TechnologyBlogs$     hexo init
+wanglizhi@wlz:~/Documents/iOS/TechnologyBlogs$     hexo install
+```
 
 #### 4.3、启动本地服务器
 [hexo常见命令](https://blog.csdn.net/dxxzst/article/details/76135935)
@@ -200,11 +212,51 @@ alias hs='hexo clean && hexo g && hexo s'
 ```
 
 ## 十、数据备份
+如果你需要更换电脑写博客，那么你的备份尤为重要，如果不备份，那么你写过的文章就gg了，尴尬不，备份的方式有很多种，这里我只介绍在`GitHub`当前仓库下创建分支的方法进行备份
 
-如果你需要更换电脑写博客，那么你的备份尤为重要，如果不备份，那么你写过的文章就gg了，尴尬不。
-算了还是不整这么复杂了，你换电脑的时候拷贝到优盘一份得了，或者放到百度网盘，不整那么累了。
+> 方案介绍：虽然新建了分支，但是这个分支跟主干没有一毛钱关系，其实这里创建分支与新建一个仓库没有什么区别，用分支主要是为了让自己的`GitHub`仓库看起来更清晰，就是个人问题，你想创建仓库你就创建
 
+- master hexo部署之后的文件放在这里，供大家访问
+- hexo 备份本地文件 
 
+#### 10.1、在仓库下新建分支
+在仓库下新建名为`hexo`的分支，名字可以随便取
+
+<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190920-172831@2x.png width=400>
+
+#### 10.2、把默认分支设置为新建的分支
+进入设置页面，设置刚刚创建的`hexo`分支为默认分支
+<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190920-172911@2x.png width=400>
+
+#### 10.3、把本地`Hexo`目录下的文件与创建的分支做关联
+##### 10.3.1、提取`.Git`文件夹
+随便新建个空文件夹，把远程仓库克隆下来，复制`.git`文件到你的博客目录下（我的目录为`~/Documents/iOS/TechnologyBlogs`），这些操作我用的`SourceTree`图形化工具，所以大家就各显神通吧
+##### 10.3.2、把文件提交到`GitHub`
+去你的博客目录下执行命令，提交文件到远端，因为这个项目只有我一个人在用，所以我就直接用`-f`强推了
+
+```
+git add .
+git commit -m 'update blog'
+git push -f
+```
+
+因为你把当前仓库的默认分支设置为了`hexo`，所以`hexo`分支下，至此备份工作完成
+
+##### 10.4、修改`alias`命令
+参考第九步将``文件的`alias`命令进行修改
+将如下命令
+
+```
+alias hd='hexo clean && hexo d && hexo d'
+```
+修改为
+
+```
+alias hd='hexo clean && hexo d && hexo d && git add . && git commit -m "update blog" && git push -f'
+```
+这样你每次用`hd`命令把你的博客部署到`GitHub`的同时也进行了备份，皆大欢喜
+
+> 以后自己买了新电脑之后只需要按照此文章安装`hexo`环境，然后把备份文件`clone`下来，挑选你需要的文件替换本地文件，自己就又能继续愉快的写博客了
 
 
 
