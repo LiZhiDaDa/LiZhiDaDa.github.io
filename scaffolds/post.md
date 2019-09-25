@@ -4,5 +4,4 @@ date: {{ date }}
 categories: 
 - iOS
 tags:
-- hexo
 ---

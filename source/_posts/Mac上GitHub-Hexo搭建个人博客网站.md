@@ -32,7 +32,7 @@ git version 2.20.1 (Apple Git-117)
 
 去[Node.js官网](https://nodejs.org/en)下载安装包，左侧是安装人数最多的版本，右侧是最新版本，你随意选择
 
-<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-171312.png width=400 vertical-align=right >
+<img src=Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-171312.png width=400>
 
 下载并安装完成之后，输入如下命令即可检查安装结果
 
