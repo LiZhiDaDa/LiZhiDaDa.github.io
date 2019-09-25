@@ -144,11 +144,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(3)</small></div></li>
+    <li><div class="all active">全部文章<small>(4)</small></div></li>
     
         
             
-            <li><div data-rel="iOS">iOS<small>(2)</small></div>
+            <li><div data-rel="iOS">iOS<small>(3)</small></div>
                 
             </li>
             
@@ -164,8 +164,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="3">
-<input type="hidden" id="yelog_site_word_count" value="2.1k">
+<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_word_count" value="2.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -214,6 +214,14 @@
            data-author="" >
             <span class="post-title" title="每日工作">每日工作</span>
             <span class="post-date" title="2019-09-20 18:03:59">2019/09/20</span>
+        </a>
+        
+        <a  class="iOS "
+           href="/2019/09/25/iOS-扩大UIbutton点击区域/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="iOS-扩大UIbutton点击区域">iOS-扩大UIbutton点击区域</span>
+            <span class="post-date" title="2019-09-25 16:37:23">2019/09/25</span>
         </a>
         
         <a  class="iOS "
@@ -268,7 +276,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-20 18:02:08'>2019-09-19 16:22</time>
+        创建时间:<time class="date" title='更新时间: 2019-09-23 17:19:11'>2019-09-19 16:22</time>
         
     </div>
     <div class="article-meta">
@@ -328,7 +336,7 @@ git version 2.20.1 (Apple Git-117)</code></pre><p>安装<code>git</code>有两�
 </ul>
 <h4 id="2-2、安装Node-js环境"><a href="#2-2、安装Node-js环境" class="headerlink" title="2.2、安装Node.js环境"></a>2.2、安装<code>Node.js</code>环境</h4><p><a href="https://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">Node.js简介</a>、<a href="https://www.runoob.com/nodejs/nodejs-npm.html" target="_blank" rel="noopener">NPM简介</a></p>
 <p>去<a href="https://nodejs.org/en" target="_blank" rel="noopener">Node.js官网</a>下载安装包，左侧是安装人数最多的版本，右侧是最新版本，你随意选择</p>
-<img src="/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-171312.png" width="400" vertical-align="right">
+<img src="/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/QQ20190919-171312.png" width="400">
 
 <p>下载并安装完成之后，输入如下命令即可检查安装结果</p>
 <pre><code>wanglizhi@wlz:~$     node --version
@@ -431,7 +439,7 @@ git push -f</code></pre><p>因为你把当前仓库的默认分支设置为了<c
     <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-09-19, 16:22:14</p>
-    <p><span class="copy-title">最后更新:</span>2019-09-20, 18:02:08</p>
+    <p><span class="copy-title">最后更新:</span>2019-09-23, 17:19:11</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/" title="Mac上GitHub+Hexo搭建个人博客网站">http://yoursite.com/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -680,6 +688,16 @@ git push -f</code></pre><p>因为你把当前仓库的默认分支设置为了<c
     }
     
 
+    
+    .post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 
