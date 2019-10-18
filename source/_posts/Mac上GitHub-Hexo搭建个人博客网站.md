@@ -194,7 +194,7 @@ vim ~/.bash_profile
 
 ```
 alias hs='hexo clean && hexo g && hexo s'
-alias hd='hexo clean && hexo d && hexo d'
+alias hd='hexo clean && hexo g && hexo d'
 ```
 
 保存文件，然后重新加载该配置文件
@@ -207,7 +207,7 @@ source .bash_profile
 
 ```
 wanglizhi@wlz:~$     alias
-alias hd='hexo clean && hexo d && hexo d'
+alias hd='hexo clean && hexo g && hexo d'
 alias hs='hexo clean && hexo g && hexo s'
 ```
 
@@ -247,12 +247,12 @@ git push -f
 将如下命令
 
 ```
-alias hd='hexo clean && hexo d && hexo d'
+alias hd='hexo clean && hexo g && hexo d'
 ```
 修改为
 
 ```
-alias hd='hexo clean && hexo d && hexo d && git add . && git commit -m "update blog" && git push -f'
+alias hd='hexo clean && hexo g && hexo d && git add . && git commit -m "update blog" && git push -f'
 ```
 这样你每次用`hd`命令把你的博客部署到`GitHub`的同时也进行了备份，皆大欢喜
 
