@@ -144,11 +144,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(4)</small></div></li>
+    <li><div class="all active">全部文章<small>(6)</small></div></li>
     
         
             
-            <li><div data-rel="iOS">iOS<small>(3)</small></div>
+            <li><div data-rel="iOS">iOS<small>(5)</small></div>
                 
             </li>
             
@@ -164,7 +164,7 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_posts_number" value="6">
 <input type="hidden" id="yelog_site_word_count" value="2.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -214,6 +214,22 @@
            data-author="" >
             <span class="post-title" title="每日工作">每日工作</span>
             <span class="post-date" title="2019-09-20 18:03:59">2019/09/20</span>
+        </a>
+        
+        <a  class="iOS "
+           href="/2019/10/18/iOS-app瘦身/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="iOS-app瘦身">iOS-app瘦身</span>
+            <span class="post-date" title="2019-10-18 14:17:45">2019/10/18</span>
+        </a>
+        
+        <a  class="iOS "
+           href="/2019/10/18/iOS-AppDelegate瘦身/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="iOS-AppDelegate瘦身">iOS-AppDelegate瘦身</span>
+            <span class="post-date" title="2019-10-18 14:16:58">2019/10/18</span>
         </a>
         
         <a  class="iOS "
@@ -276,7 +292,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-25 17:46:18'>2019-09-19 16:22</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-18 14:33:06'>2019-09-19 16:22</time>
         
     </div>
     <div class="article-meta">
@@ -395,10 +411,10 @@ hexo d</code></pre><h2 id="七、更换Hexo主题"><a href="#七、更换Hexo主
 <h2 id="九、使用alias给组合命令添加别名"><a href="#九、使用alias给组合命令添加别名" class="headerlink" title="九、使用alias给组合命令添加别名"></a>九、使用<code>alias</code>给组合命令添加别名</h2><p>百度百科<a href="https://baike.baidu.com/item/Alias/3105303" target="_blank" rel="noopener">alias</a></p>
 <h3 id="9-1、打开-bash-profile文件"><a href="#9-1、打开-bash-profile文件" class="headerlink" title="9.1、打开.bash_profile文件"></a>9.1、打开<code>.bash_profile</code>文件</h3><pre><code>vim ~/.bash_profile</code></pre><h3 id="9-2、添加别名"><a href="#9-2、添加别名" class="headerlink" title="9.2、添加别名"></a>9.2、添加别名</h3><p>在<code>.bash_profile</code>文件末尾添加两行代码</p>
 <pre><code>alias hs=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#39;
-alias hd=&#39;hexo clean &amp;&amp; hexo d &amp;&amp; hexo d&#39;</code></pre><p>保存文件，然后重新加载该配置文件</p>
+alias hd=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&#39;</code></pre><p>保存文件，然后重新加载该配置文件</p>
 <pre><code>source .bash_profile</code></pre><h3 id="9-3、查看命令是否成功"><a href="#9-3、查看命令是否成功" class="headerlink" title="9.3、查看命令是否成功"></a>9.3、查看命令是否成功</h3><p>运行<code>alias</code>命令，出现以下结果就代表配置成功，以后就可以用快捷命令<code>hs</code>、<code>hd</code>来部署项目了</p>
 <pre><code>wanglizhi@wlz:~$     alias
-alias hd=&#39;hexo clean &amp;&amp; hexo d &amp;&amp; hexo d&#39;
+alias hd=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&#39;
 alias hs=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#39;</code></pre><h2 id="十、数据备份"><a href="#十、数据备份" class="headerlink" title="十、数据备份"></a>十、数据备份</h2><p>如果你需要更换电脑写博客，那么你的备份尤为重要，如果不备份，那么你写过的文章就gg了，尴尬不，备份的方式有很多种，这里我只介绍在<code>GitHub</code>当前仓库下创建分支的方法进行备份</p>
 <blockquote>
 <p>方案介绍：虽然新建了分支，但是这个分支跟主干没有一毛钱关系，其实这里创建分支与新建一个仓库没有什么区别，用分支主要是为了让自己的<code>GitHub</code>仓库看起来更清晰，就是个人问题，你想创建仓库你就创建</p>
@@ -417,8 +433,8 @@ alias hs=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#39;</code></pre><h
 git commit -m &#39;update blog&#39;
 git push -f</code></pre><p>因为你把当前仓库的默认分支设置为了<code>hexo</code>，所以<code>hexo</code>分支下，至此备份工作完成</p>
 <h3 id="10-4、修改alias命令"><a href="#10-4、修改alias命令" class="headerlink" title="10.4、修改alias命令"></a>10.4、修改<code>alias</code>命令</h3><p>参考第九步将``文件的<code>alias</code>命令进行修改<br>将如下命令</p>
-<pre><code>alias hd=&#39;hexo clean &amp;&amp; hexo d &amp;&amp; hexo d&#39;</code></pre><p>修改为</p>
-<pre><code>alias hd=&#39;hexo clean &amp;&amp; hexo d &amp;&amp; hexo d &amp;&amp; git add . &amp;&amp; git commit -m &quot;update blog&quot; &amp;&amp; git push -f&#39;</code></pre><p>这样你每次用<code>hd</code>命令把你的博客部署到<code>GitHub</code>的同时也进行了备份，皆大欢喜</p>
+<pre><code>alias hd=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&#39;</code></pre><p>修改为</p>
+<pre><code>alias hd=&#39;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; git add . &amp;&amp; git commit -m &quot;update blog&quot; &amp;&amp; git push -f&#39;</code></pre><p>这样你每次用<code>hd</code>命令把你的博客部署到<code>GitHub</code>的同时也进行了备份，皆大欢喜</p>
 <blockquote>
 <p>以后自己买了新电脑之后只需要按照此文章安装<code>hexo</code>环境，然后把备份文件<code>clone</code>下来，挑选你需要的文件替换本地文件，自己就又能继续愉快的写博客了</p>
 </blockquote>
@@ -439,7 +455,7 @@ git push -f</code></pre><p>因为你把当前仓库的默认分支设置为了<c
     <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-09-19, 16:22:14</p>
-    <p><span class="copy-title">最后更新:</span>2019-09-25, 17:46:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-18, 14:33:06</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/" title="Mac上GitHub+Hexo搭建个人博客网站">http://yoursite.com/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
