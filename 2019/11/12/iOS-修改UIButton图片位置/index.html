@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>iOS-app瘦身 | 王立志</title>
+  <title>iOS-修改UIButton图片位置 | 王立志</title>
   <meta name="keywords" content>
-  <meta name="description" content="iOS-app瘦身 | 王立志">
+  <meta name="description" content="iOS-修改UIButton图片位置 | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="一、背景相信大家都碰到过这样的需求，button中的图片需要摆放在各种位置，每次都需要通过imageEdgeInsets、titleEdgeInsets一点一点的调整button中label、image的位置，所以我干脆写了个UIButton分类，这样以后使用起来就及其方便了，具体使用方法见Demo-TFQPositionButton，效果图如下： 二、开发过程中注意点1、imageEdgeIns">
 <meta name="keywords" content="iOSer">
@@ -278,9 +278,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-iOS-app瘦身" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-iOS-修改UIButton图片位置" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">iOS-app瘦身</h1>
+        <h1 class="article-title">iOS-修改UIButton图片位置</h1>
     
     <div class="article-meta">
         
@@ -296,12 +296,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-19 15:39:21'>2019-10-18 14:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-12 18:33:51'>2019-11-12 17:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:407</span>
+        <span>字数:129</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -331,7 +331,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、目前app的情况"><span class="toc-text">1、目前app的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、ipa包内容解析"><span class="toc-text">2、ipa包内容解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、废弃资源、代码清理"><span class="toc-text">二、废弃资源、代码清理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、AppCode排查废弃类、方法、属性"><span class="toc-text">1、AppCode排查废弃类、方法、属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、LSUnusedResources排查废弃的图片资源"><span class="toc-text">2、LSUnusedResources排查废弃的图片资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、高德等sdk减肥"><span class="toc-text">四、高德等sdk减肥</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、背景"><span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、开发过程中注意点"><span class="toc-text">二、开发过程中注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、imageEdgeInsets"><span class="toc-text">1、imageEdgeInsets</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -346,38 +346,10 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1、目前app的情况"><a href="#1、目前app的情况" class="headerlink" title="1、目前app的情况"></a>1、目前<code>app</code>的情况</h3><ul>
-<li>项目包大小475.6M</li>
-<li>ipa 57.2M</li>
-<li>蒲公英 54.4M</li>
-</ul>
-<h3 id="2、ipa包内容解析"><a href="#2、ipa包内容解析" class="headerlink" title="2、ipa包内容解析"></a>2、<code>ipa</code>包内容解析</h3><p>给app打包，得到ipa文件，然后把后缀名改为zip，解压后如图</p>
-<ul>
-<li>有1430个项目，共87.3MB</li>
-<li>图片数量占到了99%以上</li>
-<li>占内存最大的是app的可执行文件，占了50.6MB</li>
-</ul>
-<img src="/2019/10/18/iOS-app瘦身/QQ20191018-145132.png" width="500">
-<img src="/2019/10/18/iOS-app瘦身/QQ20191018-145611.png" width="500">
-接下来我们就可以针对这些文件进行优化了
-
-<h2 id="二、废弃资源、代码清理"><a href="#二、废弃资源、代码清理" class="headerlink" title="二、废弃资源、代码清理"></a>二、废弃资源、代码清理</h2><h3 id="1、AppCode排查废弃类、方法、属性"><a href="#1、AppCode排查废弃类、方法、属性" class="headerlink" title="1、AppCode排查废弃类、方法、属性"></a>1、<code>AppCode</code>排查废弃类、方法、属性</h3><p>下载<code>AppCode</code>(<code>AppCode</code>是一个可以用来开发iOS程序的民间付费IDE)，<code>Code</code> -&gt; <code>Inspect Code</code> -&gt; <code>Unused Code</code>，这时候就会显示出哪些类、方法、属性、引用、参数没有被使用过，就可以进行优化，记得二次确认。</p>
-<p>在这一步删除了没有使用到的类几十个，方法几十个，无效引用几百个</p>
-<h3 id="2、LSUnusedResources排查废弃的图片资源"><a href="#2、LSUnusedResources排查废弃的图片资源" class="headerlink" title="2、LSUnusedResources排查废弃的图片资源"></a>2、<code>LSUnusedResources</code>排查废弃的图片资源</h3><p><a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="noopener">LSUnusedResources</a>，下载之后按照教程操作即可，点击<code>Full Path(Double Click to Open)</code>这一列，会按照文件排序，方便删除<br>如下图所示，没有用到的图片288张，总共4248.14kb，现在可以挨个进行删除了，需要再次确认下是不是真的没有用到，比如有些图片资源在代码中是这样写的，那么这些图片就不能删除了，一定要小心</p>
-<pre><code>NSString *imageName = [NSString stringWithFormat:@&quot;newfeature_%d&quot;, i+ 1];</code></pre><img src="/2019/10/18/iOS-app瘦身/QQ20191018-170720.png" width="500">
-
-<blockquote>
-<p>这一波操作结束之后，删除图片540多张，<code>ipa</code>包的大小由原来的57.2M减小为51.2M</p>
-</blockquote>
-<img src="/2019/10/18/iOS-app瘦身/QQ20191019-150035@2x.png" width="500">
-<img src="/2019/10/18/iOS-app瘦身/QQ20191019-150103@2x.png" width="500">
-
-<blockquote>
-<p>可执行文件的也小了好多</p>
-</blockquote>
-<img src="/2019/10/18/iOS-app瘦身/QQ20191019-150733.png" width="500">
-
-<h2 id="四、高德等sdk减肥"><a href="#四、高德等sdk减肥" class="headerlink" title="四、高德等sdk减肥"></a>四、高德等sdk减肥</h2>
+        <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>相信大家都碰到过这样的需求，<code>button</code>中的图片需要摆放在各种位置，每次都需要通过<code>imageEdgeInsets</code>、<code>titleEdgeInsets</code>一点一点的调整<code>button</code>中<code>label</code>、<code>image</code>的位置，所以我干脆写了个<code>UIButton</code>分类，这样以后使用起来就及其方便了，具体使用方法见<a href="https://github.com/LiZhiDaDa/TFQPositionButton" target="_blank" rel="noopener">Demo-TFQPositionButton</a>，效果图如下：<br><img src="/2019/11/12/iOS-修改UIButton图片位置/QQ20191112-182641@2x.png" width="200"></p>
+<h2 id="二、开发过程中注意点"><a href="#二、开发过程中注意点" class="headerlink" title="二、开发过程中注意点"></a>二、开发过程中注意点</h2><h3 id="1、imageEdgeInsets"><a href="#1、imageEdgeInsets" class="headerlink" title="1、imageEdgeInsets"></a>1、<code>imageEdgeInsets</code></h3><pre><code>typedef struct __attribute__((objc_boxable)) UIEdgeInsets {
+    CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to &#39;outset&#39;
+} UIEdgeInsets;</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
     </div>
@@ -390,12 +362,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>iOS-app瘦身</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">407</span></p>
+    <p><span class="copy-title">文章标题:</span>iOS-修改UIButton图片位置</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">129</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-10-18, 14:17:45</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-19, 15:39:21</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/18/iOS-app瘦身/" title="iOS-app瘦身">http://yoursite.com/2019/10/18/iOS-app瘦身/</a>
+    <p><span class="copy-title">发布时间:</span>2019-11-12, 17:09:06</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-12, 18:33:51</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/12/iOS-修改UIButton图片位置/" title="iOS-修改UIButton图片位置">http://yoursite.com/2019/11/12/iOS-修改UIButton图片位置/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
