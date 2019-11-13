@@ -25,8 +25,8 @@ self.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
 
 这时候图片应该向下移动```10```的距离，经过实际调试得知，图片只向下移动了```5```，由于```UIEdgeInsetsMake```方法有上、左、下、右四个参数，但是图片肯定又不可能同时向四个方向移动，所以我怀疑图片在纵向移动的距离应该是上、下两个参数相减然后取平局值，即```(top-bottom)/2.0```，所以我有理由怀疑，让图片向下移动```10```的距离有如下两种写法
 
-- 1、```self.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 0, -10);```
-- 2、```self.imageEdgeInsets = UIEdgeInsetsMake(10*2, 0, 0, 0);```
+- ```self.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 0, -10);```
+- ```self.imageEdgeInsets = UIEdgeInsetsMake(10*2, 0, 0, 0);```
 
 经过调试，发现两种方法得到的效果是一样的，所以我就开开心心的用上、左```*2```并完全抛弃下、右两个参数的方式(```UIEdgeInsetsMake(top*2, left*2, 0, 0)```)去开发我的分类，而且这样超级方便有木有，我一度觉得开发这个方法的人秀逗了，当我设置图片向右移动的时候问题出现了，我设置的方式是```UIEdgeInsetsMake(0, left*2, 0, 0)```，我发现图片并没有向右移动```left```的距离，而是移动了一个不知道咋得来的值，所以我改变了策略，使用了方法```UIEdgeInsetsMake(0, left, 0, -left)```，这次图片规规矩矩的向右移动了```left```的距离，不知道此方法内部是怎么实现的，但是大家还是要用```UIEdgeInsetsMake(0, left, 0, -left)```的方式来设置偏移量
 
