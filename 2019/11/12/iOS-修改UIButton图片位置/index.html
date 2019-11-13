@@ -6,20 +6,18 @@
   <meta name="keywords" content>
   <meta name="description" content="iOS-修改UIButton图片位置 | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、背景相信大家都碰到过这样的需求，button中的图片需要摆放在各种位置，每次都需要通过imageEdgeInsets、titleEdgeInsets一点一点的调整button中label、image的位置，所以我干脆写了个UIButton分类，这样以后使用起来就及其方便了，具体使用方法见Demo-TFQPositionButton，效果图如下： 二、开发过程中注意点1、imageEdgeIns">
+<meta name="description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta name="keywords" content="iOSer">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS-修改UIButton图片位置">
-<meta property="og:url" content="http://yoursite.com/2019/11/12/iOS-修改UIButton图片位置/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iOS高级工程师的晋级之旅">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="王立志">
-<meta property="og:description" content="一、背景相信大家都碰到过这样的需求，button中的图片需要摆放在各种位置，每次都需要通过imageEdgeInsets、titleEdgeInsets一点一点的调整button中label、image的位置，所以我干脆写了个UIButton分类，这样以后使用起来就及其方便了，具体使用方法见Demo-TFQPositionButton，效果图如下： 二、开发过程中注意点1、imageEdgeIns">
+<meta property="og:description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/11/12/iOS-修改UIButton图片位置/QQ20191112-182641@2x.png">
-<meta property="og:updated_time" content="2019-11-12T10:33:51.438Z">
+<meta property="og:updated_time" content="2019-09-20T07:01:40.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS-修改UIButton图片位置">
-<meta name="twitter:description" content="一、背景相信大家都碰到过这样的需求，button中的图片需要摆放在各种位置，每次都需要通过imageEdgeInsets、titleEdgeInsets一点一点的调整button中label、image的位置，所以我干脆写了个UIButton分类，这样以后使用起来就及其方便了，具体使用方法见Demo-TFQPositionButton，效果图如下： 二、开发过程中注意点1、imageEdgeIns">
-<meta name="twitter:image" content="http://yoursite.com/2019/11/12/iOS-修改UIButton图片位置/QQ20191112-182641@2x.png">
+<meta name="twitter:title" content="iOS高级工程师的晋级之旅">
+<meta name="twitter:description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -167,7 +165,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="7">
-<input type="hidden" id="yelog_site_word_count" value="3k">
+<input type="hidden" id="yelog_site_word_count" value="3.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -296,12 +294,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-12 18:33:51'>2019-11-12 17:09</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-13 11:52:25'>2019-11-12 17:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:129</span>
+        <span>字数:576</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -331,7 +329,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、背景"><span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、开发过程中注意点"><span class="toc-text">二、开发过程中注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、imageEdgeInsets"><span class="toc-text">1、imageEdgeInsets</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、背景"><span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、开发过程中注意点"><span class="toc-text">二、开发过程中注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、imageEdgeInsets"><span class="toc-text">1、imageEdgeInsets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、计算UILabel的size"><span class="toc-text">2、计算UILabel的size</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -347,9 +345,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>相信大家都碰到过这样的需求，<code>button</code>中的图片需要摆放在各种位置，每次都需要通过<code>imageEdgeInsets</code>、<code>titleEdgeInsets</code>一点一点的调整<code>button</code>中<code>label</code>、<code>image</code>的位置，所以我干脆写了个<code>UIButton</code>分类，这样以后使用起来就及其方便了，具体使用方法见<a href="https://github.com/LiZhiDaDa/TFQPositionButton" target="_blank" rel="noopener">Demo-TFQPositionButton</a>，效果图如下：<br><img src="/2019/11/12/iOS-修改UIButton图片位置/QQ20191112-182641@2x.png" width="200"></p>
-<h2 id="二、开发过程中注意点"><a href="#二、开发过程中注意点" class="headerlink" title="二、开发过程中注意点"></a>二、开发过程中注意点</h2><h3 id="1、imageEdgeInsets"><a href="#1、imageEdgeInsets" class="headerlink" title="1、imageEdgeInsets"></a>1、<code>imageEdgeInsets</code></h3><pre><code>typedef struct __attribute__((objc_boxable)) UIEdgeInsets {
-    CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to &#39;outset&#39;
-} UIEdgeInsets;</code></pre>
+<h2 id="二、开发过程中注意点"><a href="#二、开发过程中注意点" class="headerlink" title="二、开发过程中注意点"></a>二、开发过程中注意点</h2><h3 id="1、imageEdgeInsets"><a href="#1、imageEdgeInsets" class="headerlink" title="1、imageEdgeInsets"></a>1、<code>imageEdgeInsets</code></h3><p>在分类的开发过程中，需要用到以下代码设置子控件的偏移量</p>
+<pre><code>self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);</code></pre><p>方法中四个参数分别代表上、左、下、右四个方向的偏移距离，比如第一个参数<code>top</code>，如果设置<code>10</code>，代表图片向下移动<code>10</code>，设置<code>-10</code>，代表向上移动<code>10</code>，但是如果我设置了</p>
+<pre><code>self.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);</code></pre><p>这时候图片应该向下移动<code>10</code>的距离，经过实际调试得知，图片只向下移动了<code>5</code>，由于<code>UIEdgeInsetsMake</code>方法有上、左、下、右四个参数，但是图片肯定又不可能同时向四个方向移动，所以我怀疑图片在纵向移动的距离应该是上、下两个参数相减然后取平局值，即<code>(top-bottom)/2.0</code>，所以我有理由怀疑，让图片向下移动<code>10</code>的距离有如下两种写法</p>
+<ul>
+<li>1、<code>self.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 0, -10);</code></li>
+<li>2、<code>self.imageEdgeInsets = UIEdgeInsetsMake(10*2, 0, 0, 0);</code></li>
+</ul>
+<p>经过调试，发现两种方法得到的效果是一样的，所以我就开开心心的用上、左<code>*2</code>并完全抛弃下、右两个参数的方式(<code>UIEdgeInsetsMake(top*2, left*2, 0, 0)</code>)去开发我的分类，而且这样超级方便有木有，我一度觉得开发这个方法的人秀逗了，当我设置图片向右移动的时候问题出现了，我设置的方式是<code>UIEdgeInsetsMake(0, left*2, 0, 0)</code>，我发现图片并没有向右移动<code>left</code>的距离，而是移动了一个不知道咋得来的值，所以我改变了策略，使用了方法<code>UIEdgeInsetsMake(0, left, 0, -left)</code>，这次图片规规矩矩的向右移动了<code>left</code>的距离，不知道此方法内部是怎么实现的，但是大家还是要用<code>UIEdgeInsetsMake(0, left, 0, -left)</code>的方式来设置偏移量</p>
+<h3 id="2、计算UILabel的size"><a href="#2、计算UILabel的size" class="headerlink" title="2、计算UILabel的size"></a>2、计算<code>UILabel</code>的<code>size</code></h3>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
     </div>
@@ -363,10 +367,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-修改UIButton图片位置</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">129</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">576</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-12, 17:09:06</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-12, 18:33:51</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-13, 11:52:25</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/12/iOS-修改UIButton图片位置/" title="iOS-修改UIButton图片位置">http://yoursite.com/2019/11/12/iOS-修改UIButton图片位置/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
