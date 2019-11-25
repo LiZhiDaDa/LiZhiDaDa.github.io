@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>iOS-修饰符 | 王立志</title>
-  <meta name="keywords" content=" hexo ">
-  <meta name="description" content="iOS-修饰符 | 王立志">
+  <title>iOS-认识Mach-O | 王立志</title>
+  <meta name="keywords" content>
+  <meta name="description" content="iOS-认识Mach-O | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta name="keywords" content="iOSer">
@@ -144,11 +144,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(7)</small></div></li>
+    <li><div class="all active">全部文章<small>(6)</small></div></li>
     
         
             
-            <li><div data-rel="iOS">iOS<small>(7)</small></div>
+            <li><div data-rel="iOS">iOS<small>(6)</small></div>
                 
             </li>
             
@@ -164,8 +164,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
-<input type="hidden" id="yelog_site_word_count" value="4.9k">
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="5.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -209,11 +209,11 @@
     <nav id="title-list-nav">
         
         <a  class="iOS "
-           href="/2019/11/13/iOS-计算文本尺寸/"
+           href="/2019/11/22/iOS-认识Mach-O/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="iOS-计算文本尺寸">iOS-计算文本尺寸</span>
-            <span class="post-date" title="2019-11-13 12:02:07">2019/11/13</span>
+            <span class="post-title" title="iOS-认识Mach-O">iOS-认识Mach-O</span>
+            <span class="post-date" title="2019-11-22 11:35:14">2019/11/22</span>
         </a>
         
         <a  class="iOS "
@@ -249,14 +249,6 @@
         </a>
         
         <a  class="iOS "
-           href="/2019/09/20/iOS-修饰符/"
-           data-tag="hexo"
-           data-author="" >
-            <span class="post-title" title="iOS-修饰符">iOS-修饰符</span>
-            <span class="post-date" title="2019-09-20 18:24:20">2019/09/20</span>
-        </a>
-        
-        <a  class="iOS "
            href="/2019/09/19/Mac上GitHub-Hexo搭建个人博客网站/"
            data-tag="hexo"
            data-author="" >
@@ -276,9 +268,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-iOS-修饰符" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-iOS-认识Mach-O" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">iOS-修饰符</h1>
+        <h1 class="article-title">iOS-认识Mach-O</h1>
     
     <div class="article-meta">
         
@@ -291,21 +283,15 @@
         </span>
         
         
-        <span class="tag">
-            
-            <a href="javascript:" class="color5">hexo</a>
-            
-        </span>
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-11-22 17:42:52'>2019-11-22 11:35</time>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-20 18:24:20'>2019-09-20 18:24</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>字数:0</span>
+        <span>字数:396</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -335,7 +321,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、名词解释"><span class="toc-text">一、名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Mach-O文件格式"><span class="toc-text">二、Mach-O文件格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、CPU架构"><span class="toc-text">三、CPU架构</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -350,7 +336,43 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><blockquote>
+<ul>
+<li>Mach-O：Mach Object文件格式的缩写，它是一种用于可执行文件，目标代码，动态库，内核转储的文件格式，曾经为大部分基于Mach核心的操作系统所使用</li>
+<li>Mach：一个由卡内基梅隆大学开发的用于支持操作系统研究的操作系统内核</li>
+</ul>
+</blockquote>
+<h2 id="二、Mach-O文件格式"><a href="#二、Mach-O文件格式" class="headerlink" title="二、Mach-O文件格式"></a>二、<code>Mach-O</code>文件格式</h2><p><code>Mach-O</code>文件是一类文件的简称，从源文件中可以得到结果<br><code>#import &lt;mach-o/loader.h&gt;</code></p>
+<pre><code>#define    MH_OBJECT    0x1        /* relocatable object file */
+#define    MH_EXECUTE    0x2        /* demand paged executable file */
+#define    MH_FVMLIB    0x3        /* fixed VM shared library file */
+#define    MH_CORE        0x4        /* core file */
+#define    MH_PRELOAD    0x5        /* preloaded executable file */
+#define    MH_DYLIB    0x6        /* dynamically bound shared library */
+#define    MH_DYLINKER    0x7        /* dynamic link editor */
+#define    MH_BUNDLE    0x8        /* dynamically bound bundle file */
+#define    MH_DYLIB_STUB    0x9        /* shared library stub for static */
+                    /*  linking only, no section contents */
+#define    MH_DSYM        0xa        /* companion file with only debug */
+                    /*  sections */
+#define    MH_KEXT_BUNDLE    0xb        /* x86_64 kexts */</code></pre><img src="/2019/11/22/iOS-认识Mach-O/Mach-O.png">
+下边就用我们项目的可执行文件介绍一下```Mach-O```文件的结构，如下图所示，把```ipa```文件的后缀名改为```zip```，解压后得到```teyuntong.app```，然后显示包内容得到可执行文件，复制到下载文件夹中
+<img src="/2019/11/22/iOS-认识Mach-O/WX20191122-161029.png">
+<img src="/2019/11/22/iOS-认识Mach-O/WX20191122-161316.png">
+
+
+
+
+
+
+<h2 id="三、CPU架构"><a href="#三、CPU架构" class="headerlink" title="三、CPU架构"></a>三、<code>CPU</code>架构</h2><p>由于苹果手机更新换代比较快，所以你的代码必须要支持市面上大部分苹果手机的架构，而苹果手机使用的处理器是arm架构，下图明确表达了苹果的机型都用的什么处理器，所以可以这么说，你的代码以及导入的所有三方库只要支持<code>arm64</code>一种架构即可</p>
+<blockquote>
+<p>iPhone6s中的s是speed，速度的意思</p>
+</blockquote>
+<img src="/2019/11/22/iOS-认识Mach-O/iPhone CPU架构.png">
+
+
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
     </div>
@@ -363,12 +385,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>iOS-修饰符</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">0</span></p>
+    <p><span class="copy-title">文章标题:</span>iOS-认识Mach-O</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">396</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-20, 18:24:20</p>
-    <p><span class="copy-title">最后更新:</span>2019-09-20, 18:24:20</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/20/iOS-修饰符/" title="iOS-修饰符">http://yoursite.com/2019/09/20/iOS-修饰符/</a>
+    <p><span class="copy-title">发布时间:</span>2019-11-22, 11:35:14</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-22, 17:42:52</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/22/iOS-认识Mach-O/" title="iOS-认识Mach-O">http://yoursite.com/2019/11/22/iOS-认识Mach-O/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
