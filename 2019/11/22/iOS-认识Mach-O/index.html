@@ -286,7 +286,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-25 17:01:00'>2019-11-22 11:35</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-25 17:03:35'>2019-11-22 11:35</time>
         
     </div>
     <div class="article-meta">
@@ -336,12 +336,10 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><blockquote>
-<ul>
+        <h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><ul>
 <li>Mach-O：Mach Object文件格式的缩写，它是一种用于可执行文件，目标代码，动态库，内核转储的文件格式，曾经为大部分基于Mach核心的操作系统所使用</li>
 <li>Mach：一个由卡内基梅隆大学开发的用于支持操作系统研究的操作系统内核</li>
 </ul>
-</blockquote>
 <h2 id="二、Mach-O文件格式"><a href="#二、Mach-O文件格式" class="headerlink" title="二、Mach-O文件格式"></a>二、<code>Mach-O</code>文件格式</h2><p><code>Mach-O</code>文件是一类文件的简称，从源文件中可以得到结果<br><code>#import &lt;mach-o/loader.h&gt;</code></p>
 <pre><code>#define    MH_OBJECT    0x1        /* relocatable object file */
 #define    MH_EXECUTE    0x2        /* demand paged executable file */
@@ -359,8 +357,10 @@
 
 <p>下边就用我们项目的可执行文件介绍一下<code>Mach-O</code>文件的结构，如下图所示，把<code>ipa</code>文件的后缀名改为<code>zip</code>，解压后得到<code>teyuntong.app</code>，然后显示包内容得到可执行文件，复制到下载文件夹中<br><img src="/2019/11/22/iOS-认识Mach-O/WX20191122-161029.png"><br><img src="/2019/11/22/iOS-认识Mach-O/WX20191122-161316.png"></p>
 <h2 id="三、动态库共享缓存"><a href="#三、动态库共享缓存" class="headerlink" title="三、动态库共享缓存"></a>三、动态库共享缓存</h2><h3 id="3-1、共享缓存机制"><a href="#3-1、共享缓存机制" class="headerlink" title="3.1、共享缓存机制"></a>3.1、共享缓存机制</h3><blockquote>
-<p>在iOS系统中，每个程序依赖的动态库都需要加载到内存中，如果每个程序都加载一遍，那么肯定会造成内存浪费，为了提高手机性能，共享缓存机制应运而生，从iOS3.1开始，为了提高性能，绝大部分的系统动态库文件都打包存放到了一个缓存文件中，这样内存中只需要加载一份动态库文件<br><img src="/2019/11/22/iOS-认识Mach-O/2.png"></p>
+<p>在iOS系统中，每个程序依赖的动态库都需要加载到内存中，如果每个程序都加载一遍，那么肯定会造成内存浪费，为了提高手机性能，共享缓存机制应运而生，从iOS3.1开始，为了提高性能，绝大部分的系统动态库文件都打包存放到了一个缓存文件中，这样内存中只需要加载一份动态库文件</p>
 </blockquote>
+<img src="/2019/11/22/iOS-认识Mach-O/2.png">
+
 <h3 id="3-2、dyld介绍"><a href="#3-2、dyld介绍" class="headerlink" title="3.2、dyld介绍"></a>3.2、<code>dyld</code>介绍</h3><p><code>dyld</code>也是一个可执行文件，在手机中的位置是<code>/usr/lib/dyld</code>，<code>dyld</code>（<code>the dynamic link editor</code>）是苹果的动态链接器，是苹果操作系统一个重要组成部分，用于加载以下类型的<code>Mach-O</code>文件</p>
 <ul>
 <li><code>MH_EXECUTE</code> 我们<code>APP</code>的可执行文件</li>
@@ -410,7 +410,7 @@ wanglizhi@wlz:~/Downloads/dyld$    ./extractor dyld_shared_cache_arm64 arm64</co
     <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-22, 11:35:14</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-25, 17:01:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-25, 17:03:35</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/22/iOS-认识Mach-O/" title="iOS-认识Mach-O">http://yoursite.com/2019/11/22/iOS-认识Mach-O/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
