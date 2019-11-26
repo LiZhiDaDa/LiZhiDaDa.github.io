@@ -72,10 +72,6 @@ wanglizhi@wlz:~/Downloads/dyld$    ./extractor dyld_shared_cache_arm64 arm64
 ```
 这样就看到了动态库共享缓存里边都有哪些文件了
 <img src="./iOS-认识Mach-O/WX20191125-164134@2x.png">
-## 四、```CPU```架构
-由于苹果手机更新换代比较快，所以你的代码必须要支持市面上大部分苹果手机的架构，而苹果手机使用的处理器是arm架构，下图明确表达了苹果的机型都用的什么处理器，所以可以这么说，你的代码以及导入的所有三方库只要支持```arm64```一种架构即可
-> iPhone6s中的s是speed，速度的意思
 
-<img src="./iOS-认识Mach-O/iPhone CPU架构.png">
 
 
