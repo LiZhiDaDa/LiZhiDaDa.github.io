@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>iOS-扩大UIbutton点击区域 | 王立志</title>
+  <title>iOS-动态库与静态库 | 王立志</title>
   <meta name="keywords" content>
-  <meta name="description" content="iOS-扩大UIbutton点击区域 | 王立志">
+  <meta name="description" content="iOS-动态库与静态库 | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta name="keywords" content="iOSer">
@@ -284,9 +284,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-iOS-扩大UIbutton点击区域" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-iOS-动态库与静态库" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">iOS-扩大UIbutton点击区域</h1>
+        <h1 class="article-title">iOS-动态库与静态库</h1>
     
     <div class="article-meta">
         
@@ -302,12 +302,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-26 15:07:17'>2019-09-25 16:37</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-26 15:53:12'>2019-11-26 14:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:264</span>
+        <span>字数:293</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -337,7 +337,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、扩大点击区域的两种方式"><span class="toc-text">一、扩大点击区域的两种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、添加UIButton分类"><span class="toc-text">1、添加UIButton分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、子类继承UIButton父类"><span class="toc-text">2、子类继承UIButton父类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择"><span class="toc-text">3、选择</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是库"><span class="toc-text">一、什么是库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、静态库和动态库的区别"><span class="toc-text">二、静态库和动态库的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、静态库拆分"><span class="toc-text">三、静态库拆分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、拆分出arm64架构的静态库"><span class="toc-text">3.2、拆分出arm64架构的静态库</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -352,32 +352,28 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、扩大点击区域的两种方式"><a href="#一、扩大点击区域的两种方式" class="headerlink" title="一、扩大点击区域的两种方式"></a>一、扩大点击区域的两种方式</h2><blockquote>
-<p>实现原理：重写系统<code>- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event</code>方法，实现对可响应区域的改变</p>
+        <h2 id="一、什么是库"><a href="#一、什么是库" class="headerlink" title="一、什么是库"></a>一、什么是库</h2><p>库是程序代码的集合，是共享代码的一种方式，实现代码复用，一般来说分为静态库和动态库。</p>
+<h2 id="二、静态库和动态库的区别"><a href="#二、静态库和动态库的区别" class="headerlink" title="二、静态库和动态库的区别"></a>二、静态库和动态库的区别</h2><ul>
+<li>静态库：<code>.a</code>、<code>.framework</code></li>
+<li>动态库：<code>.framework</code>、<code>.dylib</code>、<code>.tbd</code></li>
+</ul>
+<p>tips:</p>
+<p>1、系统的<code>framework</code>是动态的，我们自己创建的<code>framework</code>是静态的</p>
+<p>2、<code>Xcode7</code>之后<code>.dylib</code>改名为<code>.tbd</code>，应该是<code>.tbd</code>比<code>.dylib</code>占用内存小</p>
+<p>3、创建<code>framework</code>的时候，我们要选择<code>static library</code>，因为系统不允许我们使用动态库，而且我们使用动态库提交<code>AppStore</code>是会被拒的</p>
+<h2 id="三、静态库拆分"><a href="#三、静态库拆分" class="headerlink" title="三、静态库拆分"></a>三、静态库拆分</h2><blockquote>
+<p>假设我在当前文件夹下放了支付宝的动态库</p>
 </blockquote>
-<h3 id="1、添加UIButton分类"><a href="#1、添加UIButton分类" class="headerlink" title="1、添加UIButton分类"></a>1、添加<code>UIButton</code>分类</h3><ul>
-<li>优点<ul>
-<li>使用方便，导入头文件，设置点击区域即可</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>如果多个分类重写了<code>UIButton</code>的系统方法，那么最终只会执行某一个分类的系统方法，导致其它分类功能出问题</li>
-<li>分类重写父类方法之后，每个<code>UIButton</code>对象都会调用分类的方法，修改容易出问题</li>
-</ul>
-</li>
-</ul>
-<h3 id="2、子类继承UIButton父类"><a href="#2、子类继承UIButton父类" class="headerlink" title="2、子类继承UIButton父类"></a>2、子类继承<code>UIButton</code>父类</h3><ul>
-<li>优点<ul>
-<li>不侵入系统的<code>UIButton</code>类，功能清晰</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>使用的时候需要修改<code>UIButton</code>为子类<code>TFQEnlargeButton</code>，比分类多了一步操作</li>
-</ul>
-</li>
-</ul>
-<h3 id="3、选择"><a href="#3、选择" class="headerlink" title="3、选择"></a>3、选择</h3><p>首先分类是用来给原来的类增加方法的，并不是让大家用来重写父类方法的，且添加分类的方式有致命的缺点，所以这里强烈推荐继承的方式来实现扩大点击区域的功能</p>
-<p><a href="https://github.com/LiZhiDaDa/TFQEnlargeButton" target="_blank" rel="noopener">GitHub Demo</a></p>
+<img src="/2019/11/26/iOS-动态库与静态库/WX20191126-154658@2x.png">
+### 3.1、查看静态库都支持哪些架构
+```
+wanglizhi@wlz:~/Downloads/framework$     lipo -info AlipaySDK.framework/AlipaySDK
+Architectures in the fat file: AlipaySDK.framework/AlipaySDK are: i386 x86_64 armv7 arm64
+```
+
+<h3 id="3-2、拆分出arm64架构的静态库"><a href="#3-2、拆分出arm64架构的静态库" class="headerlink" title="3.2、拆分出arm64架构的静态库"></a>3.2、拆分出<code>arm64</code>架构的静态库</h3><pre><code>wanglizhi@wlz:~/Downloads/framework$     lipo AlipaySDK.framework/AlipaySDK -thin arm64 -output AlipaySDK.framework/AlipaySDK_arm64</code></pre><img src="/2019/11/26/iOS-动态库与静态库/WX20191126-154641@2x.png">
+
+<p>由上边两幅图可以看出，静态库可执行文件的体积减少了63%，这要是把项目里所有的静态库都拆分为只支持<code>arm64</code>，那简直就是究极舒服。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
@@ -391,12 +387,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>iOS-扩大UIbutton点击区域</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">264</span></p>
+    <p><span class="copy-title">文章标题:</span>iOS-动态库与静态库</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">293</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-25, 16:37:23</p>
-    <p><span class="copy-title">最后更新:</span>2019-09-26, 15:07:17</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/iOS-扩大UIbutton点击区域/" title="iOS-扩大UIbutton点击区域">http://yoursite.com/2019/09/25/iOS-扩大UIbutton点击区域/</a>
+    <p><span class="copy-title">发布时间:</span>2019-11-26, 14:41:49</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-26, 15:53:12</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/26/iOS-动态库与静态库/" title="iOS-动态库与静态库">http://yoursite.com/2019/11/26/iOS-动态库与静态库/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
