@@ -165,7 +165,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="8">
-<input type="hidden" id="yelog_site_word_count" value="6.3k">
+<input type="hidden" id="yelog_site_word_count" value="6.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -302,12 +302,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-26 15:53:12'>2019-11-26 14:41</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-26 16:11:38'>2019-11-26 14:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:293</span>
+        <span>字数:302</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -374,6 +374,7 @@ Architectures in the fat file: AlipaySDK.framework/AlipaySDK are: i386 x86_64 ar
 <h3 id="3-2、拆分出arm64架构的静态库"><a href="#3-2、拆分出arm64架构的静态库" class="headerlink" title="3.2、拆分出arm64架构的静态库"></a>3.2、拆分出<code>arm64</code>架构的静态库</h3><pre><code>wanglizhi@wlz:~/Downloads/framework$     lipo AlipaySDK.framework/AlipaySDK -thin arm64 -output AlipaySDK.framework/AlipaySDK_arm64</code></pre><img src="/2019/11/26/iOS-动态库与静态库/WX20191126-154641@2x.png">
 
 <p>由上边两幅图可以看出，静态库可执行文件的体积减少了63%，这要是把项目里所有的静态库都拆分为只支持<code>arm64</code>，那简直就是究极舒服。</p>
+<p>相关知识：<br><a href="https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/" target="_blank" rel="noopener">iOS-iPhone的CPU架构</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
@@ -388,10 +389,10 @@ Architectures in the fat file: AlipaySDK.framework/AlipaySDK are: i386 x86_64 ar
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-动态库与静态库</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">293</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">302</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-26, 14:41:49</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-26, 15:53:12</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-26, 16:11:38</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/26/iOS-动态库与静态库/" title="iOS-动态库与静态库">http://yoursite.com/2019/11/26/iOS-动态库与静态库/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
