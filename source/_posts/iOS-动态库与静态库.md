@@ -40,6 +40,9 @@ wanglizhi@wlz:~/Downloads/framework$     lipo AlipaySDK.framework/AlipaySDK -thi
 由上边两幅图可以看出，静态库可执行文件的体积减少了63%，这要是把项目里所有的静态库都拆分为只支持```arm64```，那简直就是究极舒服。
 
 
+相关知识：
+[iOS-iPhone的CPU架构](https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/)
+
 
 
 
