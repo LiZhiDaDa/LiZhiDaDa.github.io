@@ -73,4 +73,4 @@ NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 - ipa 36M
 - 可执行文件 24.6M
 
-
+> 这只是最浅显的瘦身的方法，还有更底层的等待我们去发掘
