@@ -69,7 +69,7 @@ NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 
 瘦身后：
 
-- 项目文件 475.6M
+- 项目文件 213.2M
 - ipa 36M
 - 可执行文件 24.6M
 
