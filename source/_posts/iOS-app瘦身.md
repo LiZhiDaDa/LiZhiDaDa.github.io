@@ -1,5 +1,5 @@
 ---
-title: iOS-app瘦身
+title: iOS-APP瘦身
 categories:
   - iOS
 date: 2019-10-18 14:17:45
@@ -8,20 +8,20 @@ tags:
 
 
 ## 一、准备工作
-### 1.1、目前`app`的情况
+### 1.1、目前`APP`的情况
 - 项目文件 475.6M
 - ipa 57.2M
 - 可执行文件 50.6M
 
 ### 1.2、`ipa`包内容解析
-给app打包，得到ipa文件，然后把后缀名改为zip，解压后如图
+给APP打包，得到ipa文件，然后把后缀名改为zip，解压后如图
 
 - 有1430个项目，共87.3MB
 - 图片数量占到了99%以上
-- 占内存最大的是app的可执行文件，占了50.6MB
+- 占内存最大的是APP的可执行文件，占了50.6MB
 
-<img src=iOS-app瘦身/QQ20191018-145132.png width=500>
-<img src=iOS-app瘦身/QQ20191018-145611.png width=500>
+<img src=iOS-APP瘦身/QQ20191018-145132.png width=500>
+<img src=iOS-APP瘦身/QQ20191018-145611.png width=500>
 
 接下来我们就可以针对这些文件进行优化了
 
@@ -38,12 +38,12 @@ tags:
 ```
 NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 ```
-<img src=iOS-app瘦身/QQ20191018-170720.png width=500>
+<img src=iOS-APP瘦身/QQ20191018-170720.png width=500>
 
 > 这一波操作结束之后，删除图片540多张，`ipa`包的大小由原来的57.2M减小为51.2M
 
-<img src=iOS-app瘦身/QQ20191019-150035@2x.png width=500>
-<img src=iOS-app瘦身/QQ20191019-150103@2x.png width=500>
+<img src=iOS-APP瘦身/QQ20191019-150035@2x.png width=500>
+<img src=iOS-APP瘦身/QQ20191019-150103@2x.png width=500>
 
 ### 2.3、图片压缩
 
@@ -62,9 +62,12 @@ NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 反正大家项目中用到的SDK也就那么几个，最多十几个，挨个找出来，copy一份出来，挨个查看一下静态库都支持哪些架构，然后拆分出```arm64	```架构的静态库替换掉项目中的静态库即可，拆封方法见[iOS-动态库与静态库](https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/)
 
 最后我拆分的效果如下：
-<img src="./iOS-app瘦身/WX20191127-175756@2x.png">
+<img src="./iOS-APP瘦身/WX20191127-175756@2x.png">
 
-## 五、最终结果
+## 五、资源从服务器获取
+我们本地其实是有个存放全国城市的```plist```文件，这个文件是1.4M，我并没有寻找后台人员配合把文件放到服务器，主要是因为瘦身工作是我自己给自己找的额外工作，想提高自己，知道思路就行，先不麻烦别人了。
+
+## 六、最终结果
 瘦身前：
 
 - 项目文件 475.6M
