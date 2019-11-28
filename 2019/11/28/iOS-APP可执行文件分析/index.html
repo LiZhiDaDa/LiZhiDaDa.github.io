@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>iOS-APP瘦身 | 王立志</title>
+  <title>iOS-APP可执行文件分析 | 王立志</title>
   <meta name="keywords" content>
-  <meta name="description" content="iOS-APP瘦身 | 王立志">
+  <meta name="description" content="iOS-APP可执行文件分析 | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta name="keywords" content="iOSer">
@@ -292,9 +292,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-iOS-APP瘦身" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-iOS-APP可执行文件分析" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">iOS-APP瘦身</h1>
+        <h1 class="article-title">iOS-APP可执行文件分析</h1>
     
     <div class="article-meta">
         
@@ -310,12 +310,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-28 14:01:51'>2019-10-18 14:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-28 16:29:17'>2019-11-28 14:12</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:826</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -345,7 +345,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、目前APP的情况"><span class="toc-text">1.1、目前APP的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、ipa包内容解析"><span class="toc-text">1.2、ipa包内容解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、废弃资源、代码清理"><span class="toc-text">二、废弃资源、代码清理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、AppCode排查废弃类、方法、属性"><span class="toc-text">2.1、AppCode排查废弃类、方法、属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、LSUnusedResources排查废弃的图片资源"><span class="toc-text">2.2、LSUnusedResources排查废弃的图片资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、图片压缩"><span class="toc-text">2.3、图片压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、排查项目中不用的SDK"><span class="toc-text">2.4、排查项目中不用的SDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、静态库拆分arm64架构"><span class="toc-text">四、静态库拆分arm64架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1、找到项目中所有的静态库-a、-framework"><span class="toc-text">4.1、找到项目中所有的静态库.a、.framework</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、资源从服务器获取"><span class="toc-text">五、资源从服务器获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、最终结果"><span class="toc-text">六、最终结果</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Link-Map文件生成"><span class="toc-text">一、Link Map文件生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Link-Map文件解析"><span class="toc-text">二、Link Map文件解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、Object-files"><span class="toc-text">2.1、Object files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、Sections"><span class="toc-text">2.2、Sections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、Symbols"><span class="toc-text">2.3、Symbols</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、计算各个目标文件的体积"><span class="toc-text">三、计算各个目标文件的体积</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -360,59 +360,129 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1-1、目前APP的情况"><a href="#1-1、目前APP的情况" class="headerlink" title="1.1、目前APP的情况"></a>1.1、目前<code>APP</code>的情况</h3><ul>
-<li>项目文件 475.6M</li>
-<li>ipa 57.2M</li>
-<li>可执行文件 50.6M</li>
-</ul>
-<h3 id="1-2、ipa包内容解析"><a href="#1-2、ipa包内容解析" class="headerlink" title="1.2、ipa包内容解析"></a>1.2、<code>ipa</code>包内容解析</h3><p>给APP打包，得到ipa文件，然后把后缀名改为zip，解压后如图</p>
+        <p>经过上次瘦身我们的可执行文件已经从54.4M缩小为24.6M，那么这24.6M里边到底包含些什么东西呢，接下来我们就来研究一下，其实最重要的是最后一步，看看可执行文件中哪些文件占的体积大，可以针对性优化</p>
+<h2 id="一、Link-Map文件生成"><a href="#一、Link-Map文件生成" class="headerlink" title="一、Link Map文件生成"></a>一、<code>Link Map</code>文件生成</h2><p>按照图中步骤，在<code>Xcode</code>中设置<code>Write Link Map File</code>为<code>YES</code>,允许<code>LinkMap</code>文件写入本地<br><img src="/2019/11/28/iOS-APP可执行文件分析/WX20191128-142840@2x.png"></p>
+<p>编译项目，然后参考<code>Path to Link Map File</code>寻找到文件路径如下，如果不知道<code>DerivedData</code>下边哪个是你的项目，你就把目录下的文件全删了，重新编译就会出现你现在的项目了</p>
+<pre><code>/Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/teyuntong-LinkMap-normal-arm64.txt</code></pre><p>这个文件就是可执行文件的全部了，共361156行</p>
+<h2 id="二、Link-Map文件解析"><a href="#二、Link-Map文件解析" class="headerlink" title="二、Link Map文件解析"></a>二、<code>Link Map</code>文件解析</h2><p><code>Link Map</code>文件主要有以下几块信息</p>
 <ul>
-<li>有1430个项目，共87.3MB</li>
-<li>图片数量占到了99%以上</li>
-<li>占内存最大的是APP的可执行文件，占了50.6MB</li>
+<li><code>Path</code>：此文件对应安装包的地址</li>
+<li><code>Arch</code>：app架构</li>
+<li><code>Object file</code>：目标文件列表</li>
+<li><code>Sections</code>：各种数据类型所占内存空间</li>
+<li><code>Symbols</code>：类名、变量名、方法名等符号</li>
+<li><code>Dead Stripped Symbols</code>：没用的符号</li>
 </ul>
-<img src="/2019/10/18/iOS-APP瘦身/QQ20191018-145132.png" width="500">
-<img src="/2019/10/18/iOS-APP瘦身/QQ20191018-145611.png" width="500">
-
-<p>接下来我们就可以针对这些文件进行优化了</p>
-<h2 id="二、废弃资源、代码清理"><a href="#二、废弃资源、代码清理" class="headerlink" title="二、废弃资源、代码清理"></a>二、废弃资源、代码清理</h2><h3 id="2-1、AppCode排查废弃类、方法、属性"><a href="#2-1、AppCode排查废弃类、方法、属性" class="headerlink" title="2.1、AppCode排查废弃类、方法、属性"></a>2.1、<code>AppCode</code>排查废弃类、方法、属性</h3><p>下载<code>AppCode</code>(<code>AppCode</code>是一个可以用来开发iOS程序的民间付费IDE)，<code>Code</code> -&gt; <code>Inspect Code</code> -&gt; <code>Unused Code</code>，这时候就会显示出哪些类、方法、属性、引用、参数没有被使用过，就可以进行优化，记得二次确认。</p>
-<p>在这一步删除了没有使用到的类几十个，方法几十个，无效引用几百个</p>
-<h3 id="2-2、LSUnusedResources排查废弃的图片资源"><a href="#2-2、LSUnusedResources排查废弃的图片资源" class="headerlink" title="2.2、LSUnusedResources排查废弃的图片资源"></a>2.2、<code>LSUnusedResources</code>排查废弃的图片资源</h3><p><a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="noopener">LSUnusedResources</a>，下载之后按照教程操作即可，点击<code>Full Path(Double Click to Open)</code>这一列，会按照文件排序，方便删除<br>如下图所示，没有用到的图片288张，总共4248.14kb，现在可以挨个进行删除了，需要再次确认下是不是真的没有用到，比如有些图片资源在代码中是这样写的，那么这些图片就不能删除了，一定要小心</p>
-<pre><code>NSString *imageName = [NSString stringWithFormat:@&quot;newfeature_%d&quot;, i+ 1];</code></pre><img src="/2019/10/18/iOS-APP瘦身/QQ20191018-170720.png" width="500">
-
-<blockquote>
-<p>这一波操作结束之后，删除图片540多张，<code>ipa</code>包的大小由原来的57.2M减小为51.2M</p>
-</blockquote>
-<img src="/2019/10/18/iOS-APP瘦身/QQ20191019-150035@2x.png" width="500">
-<img src="/2019/10/18/iOS-APP瘦身/QQ20191019-150103@2x.png" width="500">
-
-<h3 id="2-3、图片压缩"><a href="#2-3、图片压缩" class="headerlink" title="2.3、图片压缩"></a>2.3、图片压缩</h3><p><a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPNG</a>，推荐用这个工具进行图片压缩</p>
-<h3 id="2-4、排查项目中不用的SDK"><a href="#2-4、排查项目中不用的SDK" class="headerlink" title="2.4、排查项目中不用的SDK"></a>2.4、排查项目中不用的<code>SDK</code></h3><p>这个东西就要看大家的发挥了，我这里只说说我的经历</p>
+<p><code>Path</code>、<code>Arch</code>这两个我相信就不用多说了，下面我们分析一下其它类型</p>
+<h3 id="2-1、Object-files"><a href="#2-1、Object-files" class="headerlink" title="2.1、Object files"></a>2.1、<code>Object files</code></h3><pre><code># Object files:
+[  0] linker synthesized
+[  1] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/UIScrollView+MJExtension.o
+[  2] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTSetPasswordController.o
+[  3] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTMyGoodsModel.o
+[  4] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/BaseMapViewController.o
+[  5] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/AppDelegate.o
+[  6] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTAbnormalReportController.o
+[  7] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTOptimizeRequest.o
+[  8] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTGoodsDetailController.o
+[  9] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTMapSearchCell.o
+[ 10] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/TYTAddDriverController.o
+[ 11] /Users/wanglizhi/Library/Developer/Xcode/DerivedData/teyuntong-dubdxtwoxsmbyvgqehamoxsavmuc/Build/Intermediates.noindex/teyuntong.build/Debug-iphoneos/teyuntong.build/Objects-normal/arm64/MJRefreshAutoGifFooter.o</code></pre><h3 id="2-2、Sections"><a href="#2-2、Sections" class="headerlink" title="2.2、Sections"></a>2.2、<code>Sections</code></h3><p>描述各个段在可执行文件中的具体信息</p>
+<p>下面说下每一列的意思</p>
 <ul>
-<li>项目中用到了友盟分享，但是只分享到微信，我就把多余的qq、支付宝、微博的代码删了，节省空间24.2M</li>
+<li><code>Address</code>：偏移量</li>
+<li><code>Size</code>： 占用内存大小</li>
+<li><code>Segment</code>：代码段或初始变量</li>
+<li><code>Section</code>：具体类型</li>
 </ul>
-<h2 id="四、静态库拆分arm64架构"><a href="#四、静态库拆分arm64架构" class="headerlink" title="四、静态库拆分arm64架构"></a>四、静态库拆分<code>arm64</code>架构</h2><blockquote>
-<p>看这部分之前先看一下我的另外两篇文章<a href="https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/" target="_blank" rel="noopener">iOS-iPhone的CPU架构</a>、<a href="https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/" target="_blank" rel="noopener">iOS-动态库与静态库</a></p>
-</blockquote>
-<p>有了上边两篇文章的基础，接下来我们就可以很方便的操作了</p>
-<h3 id="4-1、找到项目中所有的静态库-a、-framework"><a href="#4-1、找到项目中所有的静态库-a、-framework" class="headerlink" title="4.1、找到项目中所有的静态库.a、.framework"></a>4.1、找到项目中所有的静态库<code>.a</code>、<code>.framework</code></h3><p>反正大家项目中用到的SDK也就那么几个，最多十几个，挨个找出来，copy一份出来，挨个查看一下静态库都支持哪些架构，然后拆分出<code>arm64</code>架构的静态库替换掉项目中的静态库即可，拆封方法见<a href="https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/" target="_blank" rel="noopener">iOS-动态库与静态库</a></p>
-<p>最后我拆分的效果如下：<br><img src="/2019/10/18/iOS-APP瘦身/WX20191127-175756@2x.png"></p>
-<h2 id="五、资源从服务器获取"><a href="#五、资源从服务器获取" class="headerlink" title="五、资源从服务器获取"></a>五、资源从服务器获取</h2><p>我们本地其实是有个存放全国城市的<code>plist</code>文件，这个文件是1.4M，我并没有寻找后台人员配合把文件放到服务器，主要是因为瘦身工作是我自己给自己找的额外工作，想提高自己，知道思路就行，先不麻烦别人了。</p>
-<h2 id="六、最终结果"><a href="#六、最终结果" class="headerlink" title="六、最终结果"></a>六、最终结果</h2><p>瘦身前：</p>
+<p><code>Segment</code>跟<code>Section</code>的具体解释</p>
 <ul>
-<li>项目文件 475.6M</li>
-<li>ipa 57.2M</li>
-<li>可执行文件 54.4M</li>
+<li><code>__TEXT</code>：代码段<ul>
+<li><code>__text</code>： 主程序代码</li>
+<li><code>__cstring</code>： c语言字符串</li>
+<li><code>stubs</code>：用于动态链接库的stub</li>
+<li><code>stub_helper</code>：用于动态链接库的stub</li>
+<li><code>__const</code>： const修饰的常量</li>
+<li><code>__objc_methname</code>： objc的方法名称</li>
+<li><code>__objc_methtype</code>： objc方法类型</li>
+<li><code>__objc_classname</code>： objc类方法</li>
 </ul>
-<p>瘦身后：</p>
+</li>
+<li><code>__DATA</code>：已经初始化的变量等<ul>
+<li><code>__objc_ivars</code>： objc类的实例变量</li>
+<li><code>__objc_classlist</code>： objc类列表</li>
+<li><code>__objc_protolist</code>： objc协议列表</li>
+<li><code>__objc_imageinfo</code>： objc镜像信息</li>
+<li><code>__objc_const</code>： objc常量</li>
+<li><code>__objc_selfrefs</code>： objc自引用(self)</li>
+<li><code>__objc_protorefs</code>： objc协议引用</li>
+<li><code>__objc_superrefs</code>： objc超类引用</li>
+<li><code>__cfstring</code>： 使用Core Foundation字符串</li>
+<li><code>__bss</code> BSS</li>
+</ul>
+</li>
+</ul>
+<pre><code># Sections:
+# Address    Size        Segment    Section
+0x100005A3C    0x014FE08C    __TEXT    __text
+0x101503AC8    0x00002E74    __TEXT    __stubs
+0x10150693C    0x00002E2C    __TEXT    __stub_helper
+0x101509768    0x0008D90F    __TEXT    __objc_methname
+0x101597077    0x0000B401    __TEXT    __objc_classname
+0x1015A2478    0x00019398    __TEXT    __objc_methtype
+0x1015BB810    0x000F92F8    __TEXT    __cstring
+0x1016B4B10    0x00080738    __TEXT    __const
+0x101735248    0x000B15E8    __TEXT    __gcc_except_tab
+0x1017E6830    0x000126B6    __TEXT    __ustring
+0x1017F8EE8    0x00036FEC    __TEXT    __unwind_info
+0x10182FED8    0x00000124    __TEXT    __eh_frame
+0x101830000    0x00000A90    __DATA    __got
+0x101830A90    0x00001EF8    __DATA    __la_symbol_ptr
+0x101832988    0x000005E0    __DATA    __mod_init_func
+0x101832F70    0x00055088    __DATA    __const
+0x101887FF8    0x0005ADE0    __DATA    __cfstring
+0x1018E2DD8    0x00003940    __DATA    __objc_classlist
+0x1018E6718    0x00000048    __DATA    __objc_nlclslist
+0x1018E6760    0x000003F0    __DATA    __objc_catlist
+0x1018E6B50    0x00000028    __DATA    __objc_nlcatlist
+0x1018E6B78    0x000008A0    __DATA    __objc_protolist
+0x1018E7418    0x00000008    __DATA    __objc_imageinfo
+0x1018E7420    0x00200E58    __DATA    __objc_const
+0x101AE8278    0x00022E88    __DATA    __objc_selrefs
+0x101B0B100    0x00000080    __DATA    __objc_protorefs
+0x101B0B180    0x00003808    __DATA    __objc_classrefs
+0x101B0E988    0x000025D8    __DATA    __objc_superrefs
+0x101B10F60    0x0000AC64    __DATA    __objc_ivar
+0x101B1BBC8    0x00023CD0    __DATA    __objc_data
+0x101B3F8A0    0x000354A8    __DATA    __data
+0x101B75000    0x00002C00    __DATA    __common
+0x101B77C00    0x0000F250    __DATA    __bss</code></pre><p>咱们看第一行的信息主程序代码的位置是<code>0x100005A3C</code>，所占内存的大小是<code>0x014FE08C</code>即<code>c*16^0+8*16^1+0*16^2+E*16^3+F*16^4+4*16^5+1*16^6</code>，那么第二行的偏移量<code>0x101503AC8</code>就等于<code>0x100005A3C</code>+<code>0x014FE08C</code></p>
+<h3 id="2-3、Symbols"><a href="#2-3、Symbols" class="headerlink" title="2.3、Symbols"></a>2.3、<code>Symbols</code></h3><p><code>Symbols</code>的信息就是标明方法、属性等占用的内存大小，以及属于哪个类</p>
 <ul>
-<li>项目文件 213.2M</li>
-<li>ipa 36M</li>
-<li>可执行文件 24.6M</li>
+<li><code>Address</code>：偏移量</li>
+<li><code>Size</code>： 占用内存大小</li>
+<li><code>File</code>：对应2.2中<code>Sections</code>的序号，表明这是哪个类里的方法</li>
+<li><code>Name</code>：方法名</li>
 </ul>
-<blockquote>
-<p>这只是最浅显的瘦身的方法，还有更底层的等待我们去发掘</p>
-</blockquote>
+<pre><code># Symbols:
+# Address    Size        File  Name
+0x100005A3C    0x0000008C    [  1] -[UIScrollView(MJExtension) setMj_insetT:]
+0x100005AC8    0x00000048    [  1] -[UIScrollView(MJExtension) mj_insetT]
+0x100005B10    0x0000008C    [  1] -[UIScrollView(MJExtension) setMj_insetB:]
+0x100005B9C    0x00000048    [  1] -[UIScrollView(MJExtension) mj_insetB]
+0x100005BE4    0x0000008C    [  1] -[UIScrollView(MJExtension) setMj_insetL:]
+0x100005C70    0x00000048    [  1] -[UIScrollView(MJExtension) mj_insetL]
+0x100005CB8    0x0000008C    [  1] -[UIScrollView(MJExtension) setMj_insetR:]
+0x100005D44    0x00000048    [  1] -[UIScrollView(MJExtension) mj_insetR]
+0x100005D8C    0x0000006C    [  1] -[UIScrollView(MJExtension) setMj_offsetX:]
+0x100005DF8    0x00000040    [  1] -[UIScrollView(MJExtension) mj_offsetX]
+0x100005E38    0x0000006C    [  1] -[UIScrollView(MJExtension) setMj_offsetY:]
+0x100005EA4    0x00000040    [  1] -[UIScrollView(MJExtension) mj_offsetY]
+0x100005EE4    0x0000006C    [  1] -[UIScrollView(MJExtension) setMj_contentW:]
+0x100005F50    0x00000040    [  1] -[UIScrollView(MJExtension) mj_contentW]
+0x100005F90    0x0000006C    [  1] -[UIScrollView(MJExtension) setMj_contentH:]
+0x100005FFC    0x00000040    [  1] -[UIScrollView(MJExtension) mj_contentH]
+0x10000603C    0x000006E0    [  2] -[TYTSetPasswordController viewDidLoad]</code></pre><h2 id="三、计算各个目标文件的体积"><a href="#三、计算各个目标文件的体积" class="headerlink" title="三、计算各个目标文件的体积"></a>三、计算各个目标文件的体积</h2><p>计算方法见<a href="https://github.com/zgzczzw/LinkMapParser" target="_blank" rel="noopener">LinkMapParser</a></p>
+<pre><code>wanglizhi@wlz:~/Downloads/LinkMapParser-master$     python parselinkmap.py teyuntong-LinkMap-normal-arm64.txt</code></pre><p>我们<code>APP</code>最终的计算结果如下，还是高德的两个SDK占用的位置最可怕，占了可执行文件的二分之一<br><img src="/2019/11/28/iOS-APP可执行文件分析/WX20191128-162409@2x.png"><br><img src="/2019/11/28/iOS-APP可执行文件分析/WX20191128-162601@2x.png"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
@@ -426,12 +496,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>iOS-APP瘦身</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">826</span></p>
+    <p><span class="copy-title">文章标题:</span>iOS-APP可执行文件分析</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-10-18, 14:17:45</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-28, 14:01:51</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/18/iOS-APP瘦身/" title="iOS-APP瘦身">http://yoursite.com/2019/10/18/iOS-APP瘦身/</a>
+    <p><span class="copy-title">发布时间:</span>2019-11-28, 14:12:25</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-28, 16:29:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/28/iOS-APP可执行文件分析/" title="iOS-APP可执行文件分析">http://yoursite.com/2019/11/28/iOS-APP可执行文件分析/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
