@@ -165,7 +165,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="9">
-<input type="hidden" id="yelog_site_word_count" value="7.9k">
+<input type="hidden" id="yelog_site_word_count" value="8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -310,12 +310,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-28 14:01:51'>2019-10-18 14:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-28 16:49:19'>2019-10-18 14:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:826</span>
+        <span>字数:862</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -392,9 +392,9 @@
 <li>项目中用到了友盟分享，但是只分享到微信，我就把多余的qq、支付宝、微博的代码删了，节省空间24.2M</li>
 </ul>
 <h2 id="四、静态库拆分arm64架构"><a href="#四、静态库拆分arm64架构" class="headerlink" title="四、静态库拆分arm64架构"></a>四、静态库拆分<code>arm64</code>架构</h2><blockquote>
-<p>看这部分之前先看一下我的另外两篇文章<a href="https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/" target="_blank" rel="noopener">iOS-iPhone的CPU架构</a>、<a href="https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/" target="_blank" rel="noopener">iOS-动态库与静态库</a></p>
+<p>看这部分之前先看一下我的另外两篇文章<a href="https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/" target="_blank" rel="noopener">iOS-iPhone的CPU架构</a>、<a href="https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/" target="_blank" rel="noopener">iOS-动态库与静态库</a>、<a href="http://localhost:4000/2019/11/28/iOS-APP%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" target="_blank" rel="noopener">iOS-APP可执行文件分析</a>(可以按照这篇文章步骤实际操作一下，看看哪些文件占用内存大)</p>
 </blockquote>
-<p>有了上边两篇文章的基础，接下来我们就可以很方便的操作了</p>
+<p>有了上边三篇文章的基础，接下来我们就可以很方便的操作了</p>
 <h3 id="4-1、找到项目中所有的静态库-a、-framework"><a href="#4-1、找到项目中所有的静态库-a、-framework" class="headerlink" title="4.1、找到项目中所有的静态库.a、.framework"></a>4.1、找到项目中所有的静态库<code>.a</code>、<code>.framework</code></h3><p>反正大家项目中用到的SDK也就那么几个，最多十几个，挨个找出来，copy一份出来，挨个查看一下静态库都支持哪些架构，然后拆分出<code>arm64</code>架构的静态库替换掉项目中的静态库即可，拆封方法见<a href="https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/" target="_blank" rel="noopener">iOS-动态库与静态库</a></p>
 <p>最后我拆分的效果如下：<br><img src="/2019/10/18/iOS-APP瘦身/WX20191127-175756@2x.png"></p>
 <h2 id="五、资源从服务器获取"><a href="#五、资源从服务器获取" class="headerlink" title="五、资源从服务器获取"></a>五、资源从服务器获取</h2><p>我们本地其实是有个存放全国城市的<code>plist</code>文件，这个文件是1.4M，我并没有寻找后台人员配合把文件放到服务器，主要是因为瘦身工作是我自己给自己找的额外工作，想提高自己，知道思路就行，先不麻烦别人了。</p>
@@ -427,10 +427,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-APP瘦身</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">826</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">862</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-10-18, 14:17:45</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-28, 14:01:51</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-28, 16:49:19</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/18/iOS-APP瘦身/" title="iOS-APP瘦身">http://yoursite.com/2019/10/18/iOS-APP瘦身/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
