@@ -55,9 +55,9 @@ NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 - 项目中用到了友盟分享，但是只分享到微信，我就把多余的qq、支付宝、微博的代码删了，节省空间24.2M
 
 ## 四、静态库拆分```arm64```架构
-> 看这部分之前先看一下我的另外两篇文章[iOS-iPhone的CPU架构](https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/)、[iOS-动态库与静态库](https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/)
+> 看这部分之前先看一下我的另外两篇文章[iOS-iPhone的CPU架构](https://lizhidada.github.io/2019/11/26/iOS-iPhone%E7%9A%84CPU%E6%9E%B6%E6%9E%84/)、[iOS-动态库与静态库](https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/)、[iOS-APP可执行文件分析](http://localhost:4000/2019/11/28/iOS-APP%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/)(可以按照这篇文章步骤实际操作一下，看看哪些文件占用内存大)
 
-有了上边两篇文章的基础，接下来我们就可以很方便的操作了
+有了上边三篇文章的基础，接下来我们就可以很方便的操作了
 ### 4.1、找到项目中所有的静态库```.a```、```.framework```
 反正大家项目中用到的SDK也就那么几个，最多十几个，挨个找出来，copy一份出来，挨个查看一下静态库都支持哪些架构，然后拆分出```arm64	```架构的静态库替换掉项目中的静态库即可，拆封方法见[iOS-动态库与静态库](https://lizhidada.github.io/2019/11/26/iOS-%E5%8A%A8%E6%80%81%E5%BA%93%E4%B8%8E%E9%9D%99%E6%80%81%E5%BA%93/)
 
