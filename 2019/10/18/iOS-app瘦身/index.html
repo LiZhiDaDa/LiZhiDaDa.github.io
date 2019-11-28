@@ -302,12 +302,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-27 18:33:14'>2019-10-18 14:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-28 11:06:31'>2019-10-18 14:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:711</span>
+        <span>字数:731</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -337,7 +337,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、目前app的情况"><span class="toc-text">1.1、目前app的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、ipa包内容解析"><span class="toc-text">1.2、ipa包内容解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、废弃资源、代码清理"><span class="toc-text">二、废弃资源、代码清理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、AppCode排查废弃类、方法、属性"><span class="toc-text">2.1、AppCode排查废弃类、方法、属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、LSUnusedResources排查废弃的图片资源"><span class="toc-text">2.2、LSUnusedResources排查废弃的图片资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、排查项目中不用的SDK"><span class="toc-text">2.3、排查项目中不用的SDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、静态库拆分arm64架构"><span class="toc-text">四、静态库拆分arm64架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1、找到项目中所有的静态库-a、-framework"><span class="toc-text">4.1、找到项目中所有的静态库.a、.framework</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、最终结果"><span class="toc-text">五、最终结果</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、目前app的情况"><span class="toc-text">1.1、目前app的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、ipa包内容解析"><span class="toc-text">1.2、ipa包内容解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、废弃资源、代码清理"><span class="toc-text">二、废弃资源、代码清理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、AppCode排查废弃类、方法、属性"><span class="toc-text">2.1、AppCode排查废弃类、方法、属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、LSUnusedResources排查废弃的图片资源"><span class="toc-text">2.2、LSUnusedResources排查废弃的图片资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、图片压缩"><span class="toc-text">2.3、图片压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、排查项目中不用的SDK"><span class="toc-text">2.4、排查项目中不用的SDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、静态库拆分arm64架构"><span class="toc-text">四、静态库拆分arm64架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1、找到项目中所有的静态库-a、-framework"><span class="toc-text">4.1、找到项目中所有的静态库.a、.framework</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、最终结果"><span class="toc-text">五、最终结果</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -378,7 +378,8 @@
 <img src="/2019/10/18/iOS-app瘦身/QQ20191019-150035@2x.png" width="500">
 <img src="/2019/10/18/iOS-app瘦身/QQ20191019-150103@2x.png" width="500">
 
-<h3 id="2-3、排查项目中不用的SDK"><a href="#2-3、排查项目中不用的SDK" class="headerlink" title="2.3、排查项目中不用的SDK"></a>2.3、排查项目中不用的<code>SDK</code></h3><p>这个东西就要看大家的发挥了，我这里只说说我的经历</p>
+<h3 id="2-3、图片压缩"><a href="#2-3、图片压缩" class="headerlink" title="2.3、图片压缩"></a>2.3、图片压缩</h3><p><a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPNG</a>，推荐用这个工具进行图片压缩</p>
+<h3 id="2-4、排查项目中不用的SDK"><a href="#2-4、排查项目中不用的SDK" class="headerlink" title="2.4、排查项目中不用的SDK"></a>2.4、排查项目中不用的<code>SDK</code></h3><p>这个东西就要看大家的发挥了，我这里只说说我的经历</p>
 <ul>
 <li>项目中用到了友盟分享，但是只分享到微信，我就把多余的qq、支付宝、微博的代码删了，节省空间24.2M</li>
 </ul>
@@ -417,10 +418,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-app瘦身</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">711</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">731</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-10-18, 14:17:45</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-27, 18:33:14</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-28, 11:06:31</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/18/iOS-app瘦身/" title="iOS-app瘦身">http://yoursite.com/2019/10/18/iOS-app瘦身/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
