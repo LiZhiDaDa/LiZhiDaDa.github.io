@@ -45,7 +45,11 @@ NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 <img src=iOS-app瘦身/QQ20191019-150035@2x.png width=500>
 <img src=iOS-app瘦身/QQ20191019-150103@2x.png width=500>
 
-### 2.3、排查项目中不用的```SDK```
+### 2.3、图片压缩
+
+[TinyPNG](https://tinypng.com/)，推荐用这个工具进行图片压缩
+
+### 2.4、排查项目中不用的```SDK```
 这个东西就要看大家的发挥了，我这里只说说我的经历
 
 - 项目中用到了友盟分享，但是只分享到微信，我就把多余的qq、支付宝、微博的代码删了，节省空间24.2M
