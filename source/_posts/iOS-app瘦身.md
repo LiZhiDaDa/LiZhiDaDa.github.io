@@ -20,8 +20,8 @@ tags:
 - 图片数量占到了99%以上
 - 占内存最大的是APP的可执行文件，占了50.6MB
 
-<img src=iOS-APP瘦身/QQ20191018-145132.png width=500>
-<img src=iOS-APP瘦身/QQ20191018-145611.png width=500>
+<img src="./iOS-APP瘦身/QQ20191018-145132.png" width=500>
+<img src="./iOS-APP瘦身/QQ20191018-145611.png" width=500>
 
 接下来我们就可以针对这些文件进行优化了
 
@@ -38,12 +38,12 @@ tags:
 ```
 NSString *imageName = [NSString stringWithFormat:@"newfeature_%d", i+ 1];
 ```
-<img src=iOS-APP瘦身/QQ20191018-170720.png width=500>
+<img src="./iOS-APP瘦身/QQ20191018-170720.png" width=500>
 
 > 这一波操作结束之后，删除图片540多张，`ipa`包的大小由原来的57.2M减小为51.2M
 
-<img src=iOS-APP瘦身/QQ20191019-150035@2x.png width=500>
-<img src=iOS-APP瘦身/QQ20191019-150103@2x.png width=500>
+<img src="./iOS-APP瘦身/QQ20191019-150035@2x.png" width=500>
+<img src="./iOS-APP瘦身/QQ20191019-150103@2x.png" width=500>
 
 ### 2.3、图片压缩
 
