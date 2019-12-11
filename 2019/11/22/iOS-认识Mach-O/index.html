@@ -326,12 +326,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-26 16:12:33'>2019-11-22 11:35</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-11 14:04:13'>2019-11-22 11:35</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:996</span>
+        <span>字数:992</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -408,7 +408,7 @@
 <li><code>MH_BUNDLE</code></li>
 </ul>
 <h3 id="3-3、动态库共享缓存文件位置"><a href="#3-3、动态库共享缓存文件位置" class="headerlink" title="3.3、动态库共享缓存文件位置"></a>3.3、动态库共享缓存文件位置</h3><blockquote>
-<p><code>dyld</code>(dynamic link editor 动态库共享缓存)文件在手机中的位置是<code>/System/Library/Caches/com.apple.dyld/dyld_shared_cache_armX</code>，这个文件位置需要越狱手机才能查看，而我的手机因为越狱半年之后变卡，所以又更新为了非越狱版本，越狱的相关信息可以查看我的另一篇文章<a href="https://juejin.im/post/5af2f94351882567096135d8" target="_blank" rel="noopener">iOS逆向入门解析</a>，既然不能从真机上获取动态库共享缓存，那我们就用iOS固件包来获取，我这里是用爱思助手下载的iOS13.2.3的固件包，下载完之后将固件包的后缀名改外<code>.zip</code>，然后解压，找到一个占内存最大的<code>dmg</code>文件，双击之后即可根据上边的路径来找到动态库共享缓存</p>
+<p>动态库共享缓存文件在手机中的位置是<code>/System/Library/Caches/com.apple.dyld/dyld_shared_cache_armX</code>，这个文件位置需要越狱手机才能查看，而我的手机因为越狱半年之后变卡，所以又更新为了非越狱版本，越狱的相关信息可以查看我的另一篇文章<a href="https://juejin.im/post/5af2f94351882567096135d8" target="_blank" rel="noopener">iOS逆向入门解析</a>，既然不能从真机上获取动态库共享缓存，那我们就用iOS固件包来获取，我这里是用爱思助手下载的iOS13.2.3的固件包，下载完之后将固件包的后缀名改外<code>.zip</code>，然后解压，找到一个占内存最大的<code>dmg</code>文件，双击之后即可根据上边的路径来找到动态库共享缓存</p>
 </blockquote>
 <img src="/2019/11/22/iOS-认识Mach-O/WX20191125-154639.png">
 
@@ -440,10 +440,10 @@ wanglizhi@wlz:~/Downloads/dyld$    ./extractor dyld_shared_cache_arm64 arm64</co
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-认识Mach-O</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">996</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">992</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-22, 11:35:14</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-26, 16:12:33</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-11, 14:04:13</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/22/iOS-认识Mach-O/" title="iOS-认识Mach-O">http://yoursite.com/2019/11/22/iOS-认识Mach-O/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
