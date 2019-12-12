@@ -72,6 +72,4 @@ wanglizhi@wlz:~/Downloads/dyld$    ./extractor dyld_shared_cache_arm64 arm64
 ```
 这样就看到了动态库共享缓存里边都有哪些文件了
 <img src="./iOS-认识Mach-O/WX20191125-164134@2x.png">
-
-
-
+这里边居然有```Twitter.framework```，是不是有什么不可告人的秘密
