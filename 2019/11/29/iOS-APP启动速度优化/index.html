@@ -165,7 +165,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="11">
-<input type="hidden" id="yelog_site_word_count" value="8k">
+<input type="hidden" id="yelog_site_word_count" value="9.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -326,12 +326,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-29 09:50:15'>2019-11-29 09:50</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-06 18:03:27'>2019-11-29 09:50</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:1.5k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -361,7 +361,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、优化背景"><span class="toc-text">一、优化背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、启动流程"><span class="toc-text">二、启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、启动时间"><span class="toc-text">2.1、启动时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、从Xcode的环境变量配置说起"><span class="toc-text">2.2、从Xcode的环境变量配置说起</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、T1优化策略"><span class="toc-text">三、T1优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、减少类、方法的数量"><span class="toc-text">3.1、减少类、方法的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、-load方法优化"><span class="toc-text">3.2、+load方法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、减少动态库的数量"><span class="toc-text">3.3、减少动态库的数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4、C-相关优化"><span class="toc-text">3.4、C++相关优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、T2优化策略"><span class="toc-text">四、T2优化策略</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -376,7 +376,117 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、优化背景"><a href="#一、优化背景" class="headerlink" title="一、优化背景"></a>一、优化背景</h2><blockquote>
+<p>我们的<code>APP</code>在启动的时候进行了很多串行网络请求，在没有网络请求不到数据的情况下，<code>APP</code>甚至都无法进入首页，而且现在首次打开<code>APP</code>都要请求网络权限，很多用户再没有看清楚提示信息的情况下就直接点击了不允许，所以就会导致<code>APP</code>卡在启动页面，此问题属于历史遗留问题，年纪比我的司龄还长，可能是为了满足产品以及领导各式各样的需求吧。既然这样，那我就把<code>APP</code>的启动时间彻底的优化一下。</p>
+</blockquote>
+<h2 id="二、启动流程"><a href="#二、启动流程" class="headerlink" title="二、启动流程"></a>二、启动流程</h2><h3 id="2-1、启动时间"><a href="#2-1、启动时间" class="headerlink" title="2.1、启动时间"></a>2.1、启动时间</h3><blockquote>
+<p>个人感觉热启动没什么好说的，所以我们这里只说冷启动。但是冷启动时间的拆分，不同的开发者可能有不同的看法，我这里说一下我的拆分</p>
+</blockquote>
+<blockquote>
+<p>T(启动时间) = T1(<code>main()</code>之前) + T2(<code>main()</code>到首页加载完成)</p>
+</blockquote>
+<h3 id="2-2、从Xcode的环境变量配置说起"><a href="#2-2、从Xcode的环境变量配置说起" class="headerlink" title="2.2、从Xcode的环境变量配置说起"></a>2.2、从<code>Xcode</code>的环境变量配置说起</h3><p><code>main()</code>之后的启动时间好测量，但是<code>main()</code>之前的时间我们很难插手，所以苹果为了方便我们测量<code>APP</code>的启动时间，给我们提供了比较方便的配置，我们只需要在<code>Edit Scheme-&gt;Run-&gt;Arguments-&gt;Environment Variables</code>位置添加环境变量<code>Name</code>=<code>DYLD_PRINT_STATISTICS</code> <code>Value</code>=<code>1</code>，然后运行<code>APP</code>控制台就可以打印如下信息：</p>
+<pre><code>Total pre-main time: 430.50 milliseconds (100.0%)
+         dylib loading time:  38.17 milliseconds (8.8%)
+        rebase/binding time:  23.63 milliseconds (5.4%)
+            ObjC setup time:  70.71 milliseconds (16.4%)
+           initializer time: 297.96 milliseconds (69.2%)
+           slowest intializers :
+             libSystem.B.dylib :   5.45 milliseconds (1.2%)
+    libMainThreadChecker.dylib :  40.02 milliseconds (9.2%)
+          libglInterpose.dylib : 210.29 milliseconds (48.8%)
+                     teyuntong :  24.92 milliseconds (5.7%)</code></pre><p>如果你需要更详细的信息，那么就可以添加这个环境变量<code>Name</code>=<code>DYLD_PRINT_STATISTICS_DETAILS</code> <code>Value</code>=<code>1</code>，运行<code>APP</code>打印信息如下：</p>
+<pre><code>  total time: 1.0 seconds (100.0%)
+  total images loaded:  393 (381 from dyld shared cache)
+  total segments mapped: 45, into 1734 pages
+  total images loading time: 512.74 milliseconds (46.7%)
+  total load time in ObjC:  62.35 milliseconds (5.6%)
+  total debugger pause time: 468.37 milliseconds (42.7%)
+  total dtrace DOF registration time:   0.00 milliseconds (0.0%)
+  total rebase fixups:  344,314
+  total rebase fixups time:  34.80 milliseconds (3.1%)
+  total binding fixups: 552,747
+  total binding fixups time: 238.80 milliseconds (21.7%)
+  total weak binding fixups time:   2.63 milliseconds (0.2%)
+  total redo shared cached bindings time: 243.06 milliseconds (22.1%)
+  total bindings lazily fixed up: 0 of 0
+  total time in initializers and ObjC +load: 245.06 milliseconds (22.3%)
+                         libSystem.B.dylib :   5.49 milliseconds (0.5%)
+               libBacktraceRecording.dylib :   6.98 milliseconds (0.6%)
+                           libobjc.A.dylib :   1.72 milliseconds (0.1%)
+
+                libMainThreadChecker.dylib :  36.82 milliseconds (3.3%)
+                      libglInterpose.dylib : 162.86 milliseconds (14.8%)
+                       libMTLCapture.dylib :   2.95 milliseconds (0.2%)
+              libViewDebuggerSupport.dylib :   6.99 milliseconds (0.6%)
+                                 teyuntong :  24.24 milliseconds (2.2%)
+total symbol trie searches:    1322801
+total symbol table binary searches:    0
+total images defining weak symbols:  45
+total images using weak symbols:  110</code></pre><p>从控制台打印信息可以看出<code>APP</code>冷启动包括<code>dylib loading</code>、<code>rebase/binding</code>、<code>ObjC setup</code>、<code>initializer</code>四个部分，从别人文章里偷个图<br><img src="/2019/11/29/iOS-APP启动速度优化/F23E982D-2966-4A25-8A80-E2E794BBFFC6.png"></p>
+<p>从上图可以看出影响<code>APP</code>启动速度的主要因素如下</p>
+<blockquote>
+<ul>
+<li>动态库的多少</li>
+<li>类、方法的多少</li>
+<li><code>+load</code>方法的多少</li>
+<li><code>C</code>构造函数的多少</li>
+<li><code>C++</code>静态全局对象的多少</li>
+</ul>
+</blockquote>
+<h2 id="三、T1优化策略"><a href="#三、T1优化策略" class="headerlink" title="三、T1优化策略"></a>三、T1优化策略</h2><blockquote>
+<p>既然我们已经知道影响<code>APP</code>启动速度的主要原因，那么我们现在就可以对症下药，把<code>APP</code>的速度提升起来，由于项目中的业务繁杂，涉及到的类也特别多，虽然经过了下边几步优化，但是T1的变化微乎其微</p>
+</blockquote>
+<h3 id="3-1、减少类、方法的数量"><a href="#3-1、减少类、方法的数量" class="headerlink" title="3.1、减少类、方法的数量"></a>3.1、减少类、方法的数量</h3><blockquote>
+<p>这里的优化方法参考我的文章<a href="https://lizhidada.github.io/2019/10/18/iOS-APP%E7%98%A6%E8%BA%AB/" target="_blank" rel="noopener">iOS-APP瘦身</a>里边的<code>2.1</code>章节</p>
+</blockquote>
+<h3 id="3-2、-load方法优化"><a href="#3-2、-load方法优化" class="headerlink" title="3.2、+load方法优化"></a>3.2、<code>+load</code>方法优化</h3><blockquote>
+<p>全局搜索<code>+load</code>方法，把方法体放到<code>+initialize</code>方法中，如果必须类加载的时候执行那么就具体问题具体分析，灵活优化</p>
+</blockquote>
+<h3 id="3-3、减少动态库的数量"><a href="#3-3、减少动态库的数量" class="headerlink" title="3.3、减少动态库的数量"></a>3.3、减少动态库的数量</h3><blockquote>
+<p>相信大家从来都是往<code>Xcode</code>里边添加动态库，并没有删除过吧，所以这里还是能删除很多没有用的的动态库，个人觉得删除动态库没有什么好方法，只能删一个编译一下，报错了再<code>import</code>进去，下边是我删除的动态库时候做的记录，大部分共享缓存里都有，所以对T1的帮助并不是很大</p>
+</blockquote>
+<pre><code>AddressBook.framework 动态库共享缓存里有
+CFNetwor.framework 动态库共享缓存里有
+WebKit.framework 动态库共享缓存里有
+UserNotifications.framework 动态库共享缓存里有
+OpenGLES.framework 动态库共享缓存里有
+QuartzCore.framework 动态库共享缓存里有
+SystemConfiguration.framework 动态库共享缓存里有
+Security.framework 动态库共享缓存里有
+libz.tbd
+libstdc++.6.0.9.tbd
+libsqlite3.tbd
+libsqlite3.dylib
+libc++.1.tbd
+ImageIO.framework 动态库共享缓存里有
+CoreBluetooth.framework 动态库共享缓存里有
+CoreFoundation.framework 动态库共享缓存里有
+AVFoundation.framework 动态库共享缓存里有
+CoreGraphics.framework 动态库共享缓存里有
+CoreLocation.framework 动态库共享缓存里有
+CoreTelephony.framework 动态库共享缓存里有
+CoreText.framework 动态库共享缓存里有
+Foundation.framework 动态库共享缓存里有
+JavaScriptCore.framework 动态库共享缓存里有
+MAMapKit.framework
+UMShare.framework
+UIKit.framework 动态库共享缓存里有</code></pre><h3 id="3-4、C-相关优化"><a href="#3-4、C-相关优化" class="headerlink" title="3.4、C++相关优化"></a>3.4、<code>C++</code>相关优化</h3><blockquote>
+<p>对<code>C++</code>不了解，所以项目里也没有<code>C++</code>代码</p>
+</blockquote>
+<h2 id="四、T2优化策略"><a href="#四、T2优化策略" class="headerlink" title="四、T2优化策略"></a>四、T2优化策略</h2><blockquote>
+<p>这部分优化跟<code>APP</code>的架构有很大的关系，架构好的话这部分可能压根就不需要优化，这里说下我的优化情况吧，下图是我们<code>APP</code>在启动的时候所做的操作，相当恐怖</p>
+</blockquote>
+<img src="/2019/11/29/iOS-APP启动速度优化/首页加载流程图_00.png">
+
+<blockquote>
+<p>针对接口的优化策略就是当前所有接口全部后移，<code>didFinishLaunching</code>之后直接加载首页，数据安排到合适的地方进行异步获取，这步可要仔细点，别该出岔子，改完之后让测试同事仔细测一下</p>
+</blockquote>
+<blockquote>
+<p>优化结果如下图所示，T2由<code>1.91s</code>优化为<code>0.19s</code></p>
+</blockquote>
+<img src="/2019/11/29/iOS-APP启动速度优化/QQ20200106-171752@2x.png">
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
     </div>
@@ -390,10 +500,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-APP启动速度优化</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">0</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-29, 09:50:14</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-29, 09:50:15</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-06, 18:03:27</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/29/iOS-APP启动速度优化/" title="iOS-APP启动速度优化">http://yoursite.com/2019/11/29/iOS-APP启动速度优化/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
