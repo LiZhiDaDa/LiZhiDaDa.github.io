@@ -35,3 +35,14 @@ tags:
 ```
 
 6、```viewWillLayoutSubviews```方法在布局```view```的子控件的时候调用
+
+### 说一下```UIView```的刷新布局操作
+
+```
+//等待下一个更新周期刷新页面布局，一定会调用layoutSubviews方法
+[self.view setNeedsLayout];
+//强制立即布局并显示更新，如果没有需要刷新的约束，那么就不会调用layoutSubviews方法
+[self.view layoutIfNeeded];
+//调用它将不做任何操作，通过上边两个方法来刷新布局，uiview可以重写这个方法来做一些操作
+[self.view layoutSubviews];
+```
