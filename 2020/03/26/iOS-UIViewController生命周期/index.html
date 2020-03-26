@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>iOS高级工程师的晋级之旅 | 王立志</title>
+  <title>iOS-UIViewController生命周期 | 王立志</title>
   <meta name="keywords" content>
-  <meta name="description" content="iOS高级工程师的晋级之旅 | 王立志">
+  <meta name="description" content="iOS-UIViewController生命周期 | 王立志">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="先记录日常，然后多积累，希望以后自己的文章越来越有深度 毕业于井冈山大学，联系方式⬅️  iOS知识学习 java知识学习 算法学习 面试记录">
 <meta name="keywords" content="iOSer">
@@ -324,24 +324,30 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-iOS-UIViewController生命周期" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">iOS高级工程师的晋级之旅</h1>
+        <h1 class="article-title">iOS-UIViewController生命周期</h1>
     
     <div class="article-meta">
         
         
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="面试">面试</a>
+            
+        </span>
         
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-20 15:01:40'>2019-09-20 14:28</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-26 16:16:23'>2020-03-26 10:52</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:55</span>
+        <span>字数:367</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -371,7 +377,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要注意的点"><span class="toc-text">需要注意的点</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -386,14 +392,23 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>先记录日常，然后多积累，希望以后自己的文章越来越有深度</p>
-<p>毕业于<a href="http://www.jgsu.edu.cn/" target="_blank" rel="noopener">井冈山大学</a>，联系方式⬅️</p>
-<ul>
-<li>iOS知识学习</li>
-<li>java知识学习</li>
-<li>算法学习</li>
-<li>面试记录</li>
-</ul>
+        <p><code>UIViewController</code>的生命周期作为一个基本知识点，大家都了解的清楚嘛，咱们先说一下顺序，然后再具体解释<br><img src="/2020/03/26/iOS-UIViewController生命周期/UIViewController生命周期.png"></p>
+<h3 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h3><p>1、按道理来讲通过<code>xib</code>创建的控制器加载的时候需要调用方法<code>awakeFromNib</code>，但是事实是没有调用，只有通过<code>xib</code>创建的<code>UIView</code>或者其子类才会调用此方法</p>
+<p>2、<code>+load</code>是类加载的时候调用，<code>+initialize</code>类创建的时候调用，<code>+load</code>还是尽量少用，可以加快启动速度</p>
+<p>3、<code>loadView</code>的作用是加载控制器管理的<code>view</code>，如果控制器有关联的<code>nib</code>文件，该方法会自动做关联并加载<code>view</code>,如果没有关联的<code>nib</code>文件，则创建空白的<code>view</code>对象</p>
+<p>4、你可以在<code>loadView</code>方法中创建<code>self.view</code>，一般不用实现此方法，如果实现了此方法那么在这个方法里边必须调用<code>[super loadView]</code>或者手动把创建<code>self.view</code>，原因见第5条</p>
+<p>5、<code>viewDidLoad</code>方法的前提是<code>self.view</code>已经创建完成，如果执行到此方法的时候，还没有创建<code>self.view</code>对象，那么系统就会去调用<code>loadView</code>方法去创建<code>view</code>，这时候如果<code>loadView</code>方法中不能创建<code>view</code>，这时候系统就会造成死循环，猜测系统内部代码如下：</p>
+<pre><code>- (void)loadView{
+    [self viewDidLoad];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    if(self.view == nil){
+        [self loadView];
+    }
+}
+</code></pre><p>6、<code>viewWillLayoutSubviews</code>方法在布局<code>view</code>的子控件的时候调用</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
@@ -405,6 +420,18 @@
     <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
 </p>
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>iOS-UIViewController生命周期</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">367</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-26, 10:52:18</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-26, 16:16:23</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/26/iOS-UIViewController生命周期/" title="iOS-UIViewController生命周期">http://yoursite.com/2020/03/26/iOS-UIViewController生命周期/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 
