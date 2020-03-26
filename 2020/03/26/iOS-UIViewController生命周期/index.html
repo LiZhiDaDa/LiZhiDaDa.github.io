@@ -173,7 +173,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="12">
-<input type="hidden" id="yelog_site_word_count" value="9.8k">
+<input type="hidden" id="yelog_site_word_count" value="9.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -342,12 +342,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-26 16:16:23'>2020-03-26 10:52</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-26 17:46:29'>2020-03-26 10:52</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:367</span>
+        <span>字数:480</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -377,7 +377,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要注意的点"><span class="toc-text">需要注意的点</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要注意的点"><span class="toc-text">需要注意的点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下UIView的刷新布局操作"><span class="toc-text">说一下UIView的刷新布局操作</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -409,7 +409,12 @@
     }
 }
 </code></pre><p>6、<code>viewWillLayoutSubviews</code>方法在布局<code>view</code>的子控件的时候调用</p>
-
+<h3 id="说一下UIView的刷新布局操作"><a href="#说一下UIView的刷新布局操作" class="headerlink" title="说一下UIView的刷新布局操作"></a>说一下<code>UIView</code>的刷新布局操作</h3><pre><code>//等待下一个更新周期刷新页面布局，一定会调用layoutSubviews方法
+[self.view setNeedsLayout];
+//强制立即布局并显示更新，如果没有需要刷新的约束，那么就不会调用layoutSubviews方法
+[self.view layoutIfNeeded];
+//调用它将不做任何操作，通过上边两个方法来刷新布局，uiview可以重写这个方法来做一些操作
+[self.view layoutSubviews];</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1226169349@qq.com </span>
     </div>
@@ -423,10 +428,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>iOS-UIViewController生命周期</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">367</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">480</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="王立志">王立志</a></p>
     <p><span class="copy-title">发布时间:</span>2020-03-26, 10:52:18</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-26, 16:16:23</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-26, 17:46:29</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/26/iOS-UIViewController生命周期/" title="iOS-UIViewController生命周期">http://yoursite.com/2020/03/26/iOS-UIViewController生命周期/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
