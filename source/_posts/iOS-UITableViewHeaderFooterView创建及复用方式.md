@@ -86,13 +86,6 @@ tags:
 }
 ```
 
-### 小总结
-
-```UITableViewCell```中复用```cell```有两个方法，当注册了```cell```的话，是用下边的方法复用，没有注册是用另一个方法进行复用
-```- (void)registerNib:(nullable UINib *)nib forCellReuseIdentifier:(NSString *)identifier API_AVAILABLE(ios(5.0));```
-
-```- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(6.0)); // newer dequeue method guarantees a cell is returned and resized properly, assuming identifier is registered```
-
 ### 思维发散
 如下这么多控件继承自```UIView```，按照上边的思路，```UILabel```、```UIButton```等这些控件，都可以使用```xib```进行自定义，定义完成之后通过```loadNibNamed```方法进行创建即可
 <img src="iOS-UITableViewHeaderFooterView创建及复用方式/QQ20200402-180451@2x.png">
